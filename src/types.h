@@ -134,15 +134,23 @@ namespace Ignis
 
     class BitMove
     {
-    private:
-        
     public:
-        BitMove() = default;
-        BitMove(Square from, Square to, MoveType type) : from(from), to(to), type(type) {};
-
-        // get/set fonksiyonu yazmaya üşendim : 
-        Square from, to;
+        Square from;
+        Square to;
         MoveType type;
+        Piece promotionPiece;
+
+        // default constructor
+        BitMove() : from(SQ_NONE), to(SQ_NONE), type(NORMAL), promotionPiece(NO_PIECE) {}
+
+        // For normal moves constructor : 
+        BitMove(Square f, Square t, MoveType ty = NORMAL) 
+            : from(f), to(t), type(ty), promotionPiece(NO_PIECE) {}
+            
+        // promotion & specia moves constructor : 
+        BitMove(Square f, Square t, MoveType ty, Piece promo) 
+            : from(f), to(t), type(ty), promotionPiece(promo) {}
+
     };
 
     class BitBoard
