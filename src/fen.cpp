@@ -111,7 +111,7 @@ namespace Ignis
             for(int file = 0; file < 8; ++file)
             {
                 Square sq = (Square)(rank * 8 + file); // buna da helper yazalım böyle çarpa işlemi falan ayıp oluyor, << ımız var
-                Bitboard bb = translate_location(sq); // helper ımız var bizim!
+                Bitboard bb = square_bb(sq); // helper ımız var bizim!
 
                 char pieceChar = 0;
 

@@ -168,7 +168,7 @@ namespace Ignis
         Bitboard BLACKS     = 0b1111111111111100000000000000000000000000000000000000000000000000;
 
         // piece move controlers:
-        Bitboard PawnAttacks[64];
+        Bitboard PawnAttacks[2][64];
         Bitboard KnightAttacks[64];
         Bitboard BishopAttacks[64];
         Bitboard RookAttacks[64];
@@ -218,7 +218,7 @@ namespace Ignis
         std::optional<MoveType>     bishopValidator (const BitMove& move);
         std::optional<MoveType>     rookValidator   (const BitMove& move);
         std::optional<MoveType>     queenValidator  (const BitMove& move);
-        std::optional<MoveType>     KingValidator   (const BitMove& move);
+        std::optional<MoveType>     kingValidator   (const BitMove& move);
 
         // game state & check helpers
         bool isKingInCheck  (void);
