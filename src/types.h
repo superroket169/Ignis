@@ -108,14 +108,14 @@ namespace Ignis
     // File operators
     constexpr File operator+(File s1, File s2) { return File(int(s1) + int(s2)); }
     constexpr File operator-(File s1, File s2) { return File(int(s1) - int(s2)); }
-    constexpr File& operator+=(File s1, File s2) { return s1 = s1 + s2; }
-    constexpr File& operator-=(File s1, File s2) { return s1 = s1 + s2; }
+    constexpr File& operator+=(File& s1, File s2) { return s1 = s1 + s2; }
+    constexpr File& operator-=(File& s1, File s2) { return s1 = s1 - s2; }
 
     // Rank operators
     constexpr Rank operator+(Rank s1, Rank s2) { return Rank(int(s1) + int(s2)); }
     constexpr Rank operator-(Rank s1, Rank s2) { return Rank(int(s1) - int(s2)); }
-    constexpr Rank& operator+=(Rank s1, Rank s2) { return s1 = s1 + s2; }
-    constexpr Rank& operator-=(Rank s1, Rank s2) { return s1 = s1 + s2; }
+    constexpr Rank& operator+=(Rank& s1, Rank s2) { return s1 = s1 + s2; }
+    constexpr Rank& operator-=(Rank& s1, Rank s2) { return s1 = s1 - s2; }
 
     // Bitboard Operations
     constexpr Bitboard operator&(Bitboard b, Square s) { return b & square_bb(s); }
@@ -127,9 +127,20 @@ namespace Ignis
     enum MoveType
     {
         NORMAL,
+        CAPTURE,
         PROMOTION,
         EN_PASSANT,
         CASTLING
+    };
+    
+    // bunu neden enum class yaptım hiçbir fikrim yok / çakışma olmasın diye
+    enum class PromotionPiece
+    {
+        None,
+        Queen,
+        Rook,
+        Bishop,
+        Knight
     };
 
     class BitMove
@@ -138,19 +149,20 @@ namespace Ignis
         Square from;
         Square to;
         MoveType type;
-        Piece promotionPiece;
+        PromotionPiece promotion = PromotionPiece::None; // Varsayılan: Yok
 
         // default constructor
-        BitMove() : from(SQ_NONE), to(SQ_NONE), type(NORMAL), promotionPiece(NO_PIECE) {}
+        BitMove() : from(SQ_NONE), to(SQ_NONE), type(NORMAL), promotion(PromotionPiece::None) {}
 
         // For normal moves constructor : 
         BitMove(Square f, Square t, MoveType ty = NORMAL) 
-            : from(f), to(t), type(ty), promotionPiece(NO_PIECE) {}
+            : from(f), to(t), type(ty), promotion(PromotionPiece::None) {}
             
         // promotion & specia moves constructor : 
-        BitMove(Square f, Square t, MoveType ty, Piece promo) 
-            : from(f), to(t), type(ty), promotionPiece(promo) {}
+        BitMove(Square f, Square t, MoveType ty, PromotionPiece promo) 
+            : from(f), to(t), type(ty), promotion(promo) {}
 
+        bool operator==(const BitMove& other) const { return from == other.from && to == other.to && promotion == other.promotion; }
     };
 
     class BitBoard
@@ -175,6 +187,22 @@ namespace Ignis
         Bitboard QueenAttacks[64];
         Bitboard KingAttacks[64];
 
+        // magic board şeyleri
+        uint64_t RookMagic[64];
+        uint64_t BishopMagic[64];
+
+        // maskeler
+        Bitboard RookMasks[64];
+        Bitboard BishopMasks[64];
+        
+        // shiftler
+        int RookShift[64];
+        int BishopShift[64];
+
+        // asıl final şeyleri. magicnumber!
+        std::vector<Bitboard> RookTable[64];
+        std::vector<Bitboard> BishopTable[64];
+
         // lookup initilazitons
         void initLookups();
 
@@ -196,7 +224,7 @@ namespace Ignis
 
     public:
         // Constructors 
-        BitBoard() = default;
+        // BitBoard() = default;
         BitBoard()
         {
             initLookups(); 
@@ -209,8 +237,12 @@ namespace Ignis
         // Move Functions
         std::optional<MoveType>     moveValidator   (const BitMove& move); // validates move
         std::optional<MoveType>     makeMove        (BitMove& move);       // for not validated moves (could return std::nullopt) uses moveValidator
-        MoveType                    makeMoveBlind   (BitMove& move);       // for already validated moves
+        MoveType                    makeMoveBlind   (BitMove& move, MoveType type); // for already validated moves
         std::vector<BitMove>        getValidMoves   (void);                // returns valid moves
+
+        // magic number helperları
+        Bitboard getRookAttacks(Square sq, Bitboard occupancy);
+        Bitboard getBishopAttacks(Square sq, Bitboard occupancy);
 
         // Validator helper functions
         std::optional<MoveType>     pawnValidator   (const BitMove& move);
@@ -220,7 +252,13 @@ namespace Ignis
         std::optional<MoveType>     queenValidator  (const BitMove& move);
         std::optional<MoveType>     kingValidator   (const BitMove& move);
 
+        // check & rook helpers
+        bool checkClearPath(Square sq1, Square sq2);
+        bool checkClearPath(Square sq1, Square sq2, Square sq3);
+        std::optional<MoveType> castlingValidator(const BitMove& move);
+
         // game state & check helpers
+        bool isSquareAttacked(Square sq, Color attackingSide);
         bool isKingInCheck  (void);
         bool getGameState   (void);
 
