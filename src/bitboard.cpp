@@ -6,6 +6,23 @@
 
 namespace Ignis
 {
+    // static definetions somethings...
+    Bitboard BitBoard::PawnAttacks[2][64];
+    Bitboard BitBoard::KnightAttacks[64];
+    Bitboard BitBoard::KingAttacks[64];
+    
+    Bitboard BitBoard::RookMasks[64];
+    Bitboard BitBoard::BishopMasks[64];
+    
+    Bitboard BitBoard::RookMagic[64];
+    Bitboard BitBoard::BishopMagic[64];
+
+    int BitBoard::RookShift[64];
+    int BitBoard::BishopShift[64];
+    
+    std::vector<Bitboard> BitBoard::RookTable[64];
+    std::vector<Bitboard> BitBoard::BishopTable[64];
+
     Bitboard BitBoard::getRookAttacks(Square sq, Bitboard occupancy)
     {
         Bitboard mask = RookMasks[sq]; 
@@ -25,6 +42,10 @@ namespace Ignis
     // tablolar
     void BitBoard::initLookups()
     {
+        static bool isInitialized = false;
+        if (isInitialized) return;
+        isInitialized = true;
+        
         for (Square sq = SQ_A1; sq <= SQ_H8; ++sq)
         {
             PawnAttacks[WHITE][sq] = 0; PawnAttacks[BLACK][sq] = 0;
@@ -152,14 +173,11 @@ namespace Ignis
         }
 
         if (!isValid) return std::nullopt;
-
-        int toIndex = (int)move.to; 
+        //if ( rank_of(move.to) == RANK_1 || rank_of(move.to) == RANK_8 ) return MoveType::PROMOTION;
         
-        if (toIndex >= 56 || toIndex <= 7)
-        {
-            return MoveType::PROMOTION;
-        }
-
+        Rank r = rank_of(move.to);
+        if (r == RANK_1 || r == RANK_8) return MoveType::PROMOTION;
+                
         return type;
     }
 
@@ -200,6 +218,7 @@ namespace Ignis
         return MoveType::NORMAL;
     }
 
+    // önemli : şah-çekme kontrolü ve pinli taşlar eklenecek!
     std::optional<MoveType> BitBoard::moveValidator(const BitMove& move)
     {
         // Friendly Fire
@@ -221,9 +240,18 @@ namespace Ignis
                                             if (!moveType.has_value()) moveType = kingValidator(move);
                                         }
 
-        if (!moveType.has_value()) return std::nullopt;
+        if (!moveType.has_value())          return std::nullopt;
+        if (!pinnedControl(move, moveType.value())) return std::nullopt;
 
         return moveType;
+    }
+
+    bool BitBoard::pinnedControl(const BitMove& move, MoveType& moveType)
+    {
+        BitBoard tmp(*this);
+        tmp.makeMoveBlind(move, moveType);
+
+        return !tmp.isKingInCheck(this->side);
     }
 
     std::optional<MoveType> BitBoard::makeMove(BitMove& move)
@@ -242,7 +270,7 @@ namespace Ignis
         return type;
     }
     
-    MoveType BitBoard::makeMoveBlind(BitMove& move, MoveType type)
+    MoveType BitBoard::makeMoveBlind(const BitMove& move, MoveType type)
     {
         Bitboard fromBB = square_bb(move.from);
         Bitboard toBB   = square_bb(move.to);
@@ -315,10 +343,19 @@ namespace Ignis
         return type;
     }
 
-    std::vector<BitMove> BitBoard::getValidMoves(void)
+    std::vector<BitMove> BitBoard::getValidMoves(Color side)
     {
         std::vector<BitMove> moves;
-        // WIP
+        Bitboard occupancies = (side == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
+        
+        Square nextBit = Square(__builtin_ctzll(occupancies));
+        while(true)
+        {
+            //....
+            occupancies &= occupancies -1;
+            nextBit = Square(__builtin_ctzll(occupancies));
+        }
+
         return moves;
     }
 
@@ -347,12 +384,21 @@ namespace Ignis
         return false;
     }
 
-    bool BitBoard::isKingInCheck(void)
+    bool BitBoard::isKingInCheck()
     {
         Bitboard kingBit = (side == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
         Square kingSq = Square(__builtin_ctzll(kingBit));
 
         return isSquareAttacked(kingSq, (Color)(1 - side));
+    }
+
+    // fonksiyon overloading daha mantıklı
+    bool BitBoard::isKingInCheck(Color kingSide)
+    {
+        Bitboard kingBit = (kingSide == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
+        Square kingSq = Square(__builtin_ctzll(kingBit));
+
+        return isSquareAttacked(kingSq, (Color)(1 - kingSide));
     }
 
     // castling helperları. daha temiz bir rok olsun die

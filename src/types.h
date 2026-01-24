@@ -76,7 +76,7 @@ namespace Ignis
 
     enum Rank : uint8_t
     {
-        RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8  = 8,
+        RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8,
         RANK_NB = 8
     };
 
@@ -180,31 +180,28 @@ namespace Ignis
         Bitboard BLACKS     = 0b1111111111111100000000000000000000000000000000000000000000000000;
 
         // piece move controlers:
-        Bitboard PawnAttacks[2][64];
-        Bitboard KnightAttacks[64];
-        Bitboard BishopAttacks[64];
-        Bitboard RookAttacks[64];
-        Bitboard QueenAttacks[64];
-        Bitboard KingAttacks[64];
+        static Bitboard PawnAttacks[2][64];
+        static Bitboard KnightAttacks[64];
+        static Bitboard BishopAttacks[64];
+        static Bitboard RookAttacks[64];
+        static Bitboard QueenAttacks[64];
+        static Bitboard KingAttacks[64];
 
         // magic board şeyleri
-        uint64_t RookMagic[64];
-        uint64_t BishopMagic[64];
+        static uint64_t RookMagic[64];
+        static uint64_t BishopMagic[64];
 
         // maskeler
-        Bitboard RookMasks[64];
-        Bitboard BishopMasks[64];
+        static Bitboard RookMasks[64];
+        static Bitboard BishopMasks[64];
         
         // shiftler
-        int RookShift[64];
-        int BishopShift[64];
+        static int RookShift[64];
+        static int BishopShift[64];
 
         // asıl final şeyleri. magicnumber!
-        std::vector<Bitboard> RookTable[64];
-        std::vector<Bitboard> BishopTable[64];
-
-        // lookup initilazitons
-        void initLookups();
+        static std::vector<Bitboard> RookTable[64];
+        static std::vector<Bitboard> BishopTable[64];
 
         // specific values
         Bitboard enpassantTarget = 0b0000000000000000000000000000000000000000000000000000000000000000;
@@ -224,12 +221,41 @@ namespace Ignis
 
     public:
         // Constructors 
-        // BitBoard() = default;
         BitBoard()
         {
-            initLookups(); 
-            // diğer değişkenleri tek tek değerlendirmemiz gerekiyor mu?
-        };
+            initLookups();
+        }
+        BitBoard(BitBoard& oth)
+        {
+            *this = oth;
+        }
+        
+        // lookup initilazitons
+        void initLookups();
+
+        BitBoard& operator=(const BitBoard& oth)
+        {
+            if (this == &oth) return *this;
+
+            this->PAWNS   = oth.PAWNS;
+            this->KNIGHTS = oth.KNIGHTS;
+            this->BISHOPS = oth.BISHOPS;
+            this->ROOKS   = oth.ROOKS;
+            this->QUEENS  = oth.QUEENS;
+            this->KINGS   = oth.KINGS;
+            this->WHITES  = oth.WHITES;
+            this->BLACKS  = oth.BLACKS;
+
+            this->side            = oth.side;
+            this->enpassantTarget = oth.enpassantTarget;
+            
+            this->whiteCastlingQS = oth.whiteCastlingQS;
+            this->whiteCastlingKS = oth.whiteCastlingKS;
+            this->blackCastlingQS = oth.blackCastlingQS;
+            this->blackCastlingKS = oth.blackCastlingKS;
+
+            return *this;
+        }
 
         // get specific values
         bool getCastled(Color c) { return c == WHITE ? whiteCastlingQS && whiteCastlingKS : blackCastlingQS && blackCastlingKS; }
@@ -237,8 +263,8 @@ namespace Ignis
         // Move Functions
         std::optional<MoveType>     moveValidator   (const BitMove& move); // validates move
         std::optional<MoveType>     makeMove        (BitMove& move);       // for not validated moves (could return std::nullopt) uses moveValidator
-        MoveType                    makeMoveBlind   (BitMove& move, MoveType type); // for already validated moves
-        std::vector<BitMove>        getValidMoves   (void);                // returns valid moves
+        MoveType                    makeMoveBlind   (const BitMove& move, MoveType type); // for already validated moves
+        std::vector<BitMove>        getValidMoves   (Color side);                // returns valid moves
 
         // magic number helperları
         Bitboard getRookAttacks(Square sq, Bitboard occupancy);
@@ -251,6 +277,7 @@ namespace Ignis
         std::optional<MoveType>     rookValidator   (const BitMove& move);
         std::optional<MoveType>     queenValidator  (const BitMove& move);
         std::optional<MoveType>     kingValidator   (const BitMove& move);
+        bool                        pinnedControl   (const BitMove& move, MoveType& moveType);
 
         // check & rook helpers
         bool checkClearPath(Square sq1, Square sq2);
@@ -260,6 +287,7 @@ namespace Ignis
         // game state & check helpers
         bool isSquareAttacked(Square sq, Color attackingSide);
         bool isKingInCheck  (void);
+        bool isKingInCheck  (Color side);
         bool getGameState   (void);
 
         // FEN functions
