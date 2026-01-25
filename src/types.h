@@ -304,7 +304,7 @@ namespace Ignis
         Bitboard getBISHOPS() const  { return BISHOPS; }
         Bitboard getROOKS()   const  { return ROOKS;   }
         Bitboard getQUEENS()  const  { return QUEENS;  }
-        Bitboard get_KINGS()  const  { return KINGS;   }
+        Bitboard getKINGS()  const  { return KINGS;   }
 
         Bitboard getWHITES()  const { return WHITES;  }
         Bitboard getBLACKS()  const { return BLACKS;  }
