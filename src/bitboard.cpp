@@ -167,7 +167,7 @@ namespace Ignis
 
         if (type == MoveType::CASTLING)
         {
-            Square rookFrom, rookTo;
+            Square rookFrom = SQ_A1, rookTo = SQ_A1;
             if (move.to == SQ_G1)      { rookFrom = SQ_H1; rookTo = SQ_F1; }
             else if (move.to == SQ_C1) { rookFrom = SQ_A1; rookTo = SQ_D1; }
             else if (move.to == SQ_G8) { rookFrom = SQ_H8; rookTo = SQ_F8; }
@@ -208,7 +208,7 @@ namespace Ignis
         enpassantTarget = 0;
         if ((fromBB & PAWNS) && (std::abs((int)move.to - (int)move.from) == 16))
         {
-             enpassantTarget = square_bb((Square)((move.from + move.to) / 2));
+            enpassantTarget = square_bb((Square)((move.from + move.to) / 2));
         }
 
         passTurn();
@@ -305,8 +305,8 @@ namespace Ignis
         Bitboard attackerRookQueens   = (attacker == WHITE) ? (WHITES & (ROOKS | QUEENS)) : (BLACKS & (ROOKS | QUEENS));
         Bitboard attackerBishopQueens = (attacker == WHITE) ? (WHITES & (BISHOPS | QUEENS)) : (BLACKS & (BISHOPS | QUEENS));
 
-        if (sq == SQ_E1 && (attackerBishopQueens & square_bb(SQ_H4)))
-            Bitboard bishopAttacks = getBishopAttacks(sq, WHITES | BLACKS);
+        // if (sq == SQ_E1 && (attackerBishopQueens & square_bb(SQ_H4)))
+        //     Bitboard bishopAttacks = getBishopAttacks(sq, WHITES | BLACKS);
 
         if (PawnAttacks[(attacker == WHITE) ? BLACK : WHITE][sq] & attackerPawns) return true;
 
