@@ -1,138 +1,10 @@
 #include "types.h"
 #include "magicboard.h"
-#include "magicnumbers.h" 
 #include <iostream>
 #include <cmath>
 
 namespace Ignis
 {
-    // static definetions somethings...
-    Bitboard BitBoard::PawnAttacks[2][64];
-    Bitboard BitBoard::KnightAttacks[64];
-    Bitboard BitBoard::KingAttacks[64];
-    
-    Bitboard BitBoard::RookMasks[64];
-    Bitboard BitBoard::BishopMasks[64];
-    
-    Bitboard BitBoard::RookMagic[64];
-    Bitboard BitBoard::BishopMagic[64];
-
-    int BitBoard::RookShift[64];
-    int BitBoard::BishopShift[64];
-    
-    std::vector<Bitboard> BitBoard::RookTable[64];
-    std::vector<Bitboard> BitBoard::BishopTable[64];
-
-    Bitboard BitBoard::getRookAttacks(Square sq, Bitboard occupancy)
-    {
-        Bitboard mask = RookMasks[sq]; 
-        occupancy &= mask;
-        int index = (int)((occupancy * RookMagic[sq]) >> RookShift[sq]);
-        return RookTable[sq][index];
-    }
-
-    Bitboard BitBoard::getBishopAttacks(Square sq, Bitboard occupancy)
-    {
-        Bitboard mask = BishopMasks[sq];
-        occupancy &= mask;
-        int index = (int)((occupancy * BishopMagic[sq]) >> BishopShift[sq]);
-        return BishopTable[sq][index];
-    }
-
-    // tablolar
-    void BitBoard::initLookups()
-    {
-        static bool isInitialized = false;
-        if (isInitialized) return;
-        isInitialized = true;
-        
-        for (Square sq = SQ_A1; sq <= SQ_H8; ++sq)
-        {
-            PawnAttacks[WHITE][sq] = 0; PawnAttacks[BLACK][sq] = 0;
-            Rank r = rank_of(sq); File f = file_of(sq);
-
-            // Pawns
-            if (r < RANK_8)
-            {
-                if (f < FILE_H) PawnAttacks[WHITE][sq] |= square_bb(sq + NORTH_EAST);
-                if (f > FILE_A) PawnAttacks[WHITE][sq] |= square_bb(sq + NORTH_WEST);
-            }
-            if (r > RANK_1)
-            {
-                if (f < FILE_H) PawnAttacks[BLACK][sq] |= square_bb(sq + SOUTH_EAST);
-                if (f > FILE_A) PawnAttacks[BLACK][sq] |= square_bb(sq + SOUTH_WEST);
-            }
-
-            // Knights
-            KnightAttacks[sq] = 0;
-            const int dr[] = { 2, 1, -1, -2, -2, -1, 1, 2 };
-            const int df[] = { 1, 2, 2, 1, -1, -2, -2, -1 };
-            for (int i = 0; i < 8; ++i)
-            {
-                int tr = int(r) + dr[i]; int tf = int(f) + df[i];
-                if (is_ok(Rank(tr)) && is_ok(File(tf)))
-                    KnightAttacks[sq] |= square_bb(filerank_square(File(tf), Rank(tr)));
-            }
-
-            // King
-            KingAttacks[sq] = 0;
-            Direction dirs[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST };
-            for (Direction d : dirs)
-            {
-                Rank tr = rank_of(sq); File tf = file_of(sq);
-
-                if (d == NORTH && tr == RANK_8) continue;
-                if (d == SOUTH && tr == RANK_1) continue;
-                if (d == EAST  && tf == FILE_H) continue;
-                if (d == WEST  && tf == FILE_A) continue;
-
-                Square t = sq + d; 
-                if (t >= SQ_A1 && t <= SQ_H8) 
-                {
-                    int r_diff = std::abs(int(rank_of(t)) - int(r));
-                    int f_diff = std::abs(int(file_of(t)) - int(f));
-                    if(r_diff <= 1 && f_diff <= 1) KingAttacks[sq] |= square_bb(t);
-                }
-            }
-        }
-
-        // magic somethings
-        for (Square sq = SQ_A1; sq <= SQ_H8; ++sq)
-        {
-            // Rook
-            RookMasks[sq] = getRookMask(sq);
-            int rookBits  = count_1s(RookMasks[sq]);
-            RookShift[sq] = 64 - rookBits;
-            RookMagic[sq] = RookMagics[sq]; 
-
-            int size = (1 << rookBits);
-            RookTable[sq].resize(size);
-
-            for (int i = 0; i < size; i++)
-            {
-                Bitboard occupancy = set_occupancy(i, rookBits, RookMasks[sq]);
-                int magicIndex = (int)((occupancy * RookMagic[sq]) >> RookShift[sq]);
-                RookTable[sq][magicIndex] = rookAttacksSlow(sq, occupancy);
-            }
-
-            // Bishop
-            BishopMasks[sq] = getBishopMask(sq);
-            int bishopBits  = count_1s(BishopMasks[sq]);
-            BishopShift[sq] = 64 - bishopBits;
-            BishopMagic[sq] = BishopMagics[sq];
-
-            size = (1 << bishopBits);
-            BishopTable[sq].resize(size);
-
-            for (int i = 0; i < size; i++)
-            {
-                Bitboard occupancy = set_occupancy(i, bishopBits, BishopMasks[sq]);
-                int magicIndex = (int)((occupancy * BishopMagic[sq]) >> BishopShift[sq]);
-                BishopTable[sq][magicIndex] = bishopAttacksSlow(sq, occupancy);
-            }
-        }
-    }
-
     // validators
     std::optional<MoveType> BitBoard::pawnValidator(const BitMove& move)
     {
@@ -345,15 +217,80 @@ namespace Ignis
 
     std::vector<BitMove> BitBoard::getValidMoves(Color side)
     {
-        std::vector<BitMove> moves;
-        Bitboard occupancies = (side == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
+        std::vector<BitMove> moves; moves.reserve(40);
+        Bitboard pieces = (side == WHITE) ? WHITES : BLACKS; // fixed copy error // isimlendirmeyi de yanlış yapmışım
+        const Bitboard myPieces = pieces; // gerçek bir şekilde friendly fire kontrolü için
         
-        Square nextBit = Square(__builtin_ctzll(occupancies));
-        while(true)
+        while(pieces)
         {
-            //....
-            occupancies &= occupancies -1;
-            nextBit = Square(__builtin_ctzll(occupancies));
+            Square from = Square(__builtin_ctzll(pieces));
+            Bitboard fromBB = square_bb(from);
+            Bitboard targets = 0; // en son while + pb yapacaz hepsini
+
+            if (fromBB & PAWNS)
+            {
+                Direction dir = (side == WHITE) ? NORTH : SOUTH;
+
+                // tekli ileri
+                BitMove pushMove(from, (Square)(from + dir));
+                if (moveValidator(pushMove).has_value())
+                {
+                    if (rank_of(from + dir) == RANK_1 || rank_of(from + dir) == RANK_8)
+                    {
+                        moves.push_back(BitMove(from, from + dir, MoveType::PROMOTION, PromotionPiece::Queen));
+                        moves.push_back(BitMove(from, from + dir, MoveType::PROMOTION, PromotionPiece::Rook));
+                        moves.push_back(BitMove(from, from + dir, MoveType::PROMOTION, PromotionPiece::Bishop));
+                        moves.push_back(BitMove(from, from + dir, MoveType::PROMOTION, PromotionPiece::Knight));
+                    }
+                    else moves.push_back(pushMove);
+                }
+
+                // ikili ileri
+                BitMove doubleMove(from, (Square)(from + dir + dir));
+                if (moveValidator(doubleMove).has_value())
+                {
+                    moves.push_back(doubleMove);
+                }
+
+                targets = PawnAttacks[side][from] & ((WHITES | BLACKS) | enpassantTarget);
+            }
+            else if (fromBB & KNIGHTS)  targets = KnightAttacks[from];
+            else if (fromBB & BISHOPS)  targets = getBishopAttacks(from, WHITES | BLACKS);
+            else if (fromBB & ROOKS)    targets = getRookAttacks(from, WHITES | BLACKS);
+            else if (fromBB & QUEENS)   targets = getBishopAttacks(from, WHITES | BLACKS) | getRookAttacks(from, WHITES | BLACKS);
+            else if (fromBB & KINGS)
+            {
+                targets = KingAttacks[from];
+                
+                // manuel castling kontrolü ):
+                if (side == WHITE)
+                {
+                    if (whiteCastlingKS) { BitMove m(SQ_E1, SQ_G1); if(moveValidator(m)) moves.push_back(m); }
+                    if (whiteCastlingQS) { BitMove m(SQ_E1, SQ_C1); if(moveValidator(m)) moves.push_back(m); }
+                }
+                else
+                {
+                    if (blackCastlingKS) { BitMove m(SQ_E8, SQ_G8); if(moveValidator(m)) moves.push_back(m); }
+                    if (blackCastlingQS) { BitMove m(SQ_E8, SQ_C8); if(moveValidator(m)) moves.push_back(m); }
+                }
+            }
+
+            // friendly fire ları çıkarma
+            targets &= ~myPieces;
+
+            // buu sefer validator a sormak zorundayız // şah kontrolü için
+            while(targets)
+            {
+                Square to = Square(__builtin_ctzll(targets));
+                BitMove m(from, to);
+                
+                if (moveValidator(m).has_value()) 
+                    moves.push_back(m);
+
+                targets &= targets - 1;
+            }
+
+            pieces &= pieces -1;
         }
 
         return moves;
@@ -368,7 +305,10 @@ namespace Ignis
         Bitboard attackerRookQueens   = (attacker == WHITE) ? (WHITES & (ROOKS | QUEENS)) : (BLACKS & (ROOKS | QUEENS));
         Bitboard attackerBishopQueens = (attacker == WHITE) ? (WHITES & (BISHOPS | QUEENS)) : (BLACKS & (BISHOPS | QUEENS));
 
-        if (PawnAttacks[1 - attacker][sq] & attackerPawns) return true;
+        if (sq == SQ_E1 && (attackerBishopQueens & square_bb(SQ_H4)))
+            Bitboard bishopAttacks = getBishopAttacks(sq, WHITES | BLACKS);
+
+        if (PawnAttacks[(attacker == WHITE) ? BLACK : WHITE][sq] & attackerPawns) return true;
 
         // knight
         if (KnightAttacks[sq] & attackerKnights) return true;
@@ -386,32 +326,37 @@ namespace Ignis
 
     bool BitBoard::isKingInCheck()
     {
-        Bitboard kingBit = (side == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
-        Square kingSq = Square(__builtin_ctzll(kingBit));
-
-        return isSquareAttacked(kingSq, (Color)(1 - side));
+        return isKingInCheck(this->side);
     }
 
-    // fonksiyon overloading daha mantıklı
-    bool BitBoard::isKingInCheck(Color kingSide)
+    bool BitBoard::isKingInCheck(Color c)
     {
-        Bitboard kingBit = (kingSide == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
-        Square kingSq = Square(__builtin_ctzll(kingBit));
+        Bitboard kingBit = (c == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
+        if (!kingBit) return true; // salakça kontrol (:
 
-        return isSquareAttacked(kingSq, (Color)(1 - kingSide));
+        Square kingSq = Square(__builtin_ctzll(kingBit));
+        return isSquareAttacked(kingSq, (Color)(1 - c));
     }
 
     // castling helperları. daha temiz bir rok olsun die
     bool BitBoard::checkClearPath(Square sq1, Square sq2)
     {
+        // Bitboard occupancy = WHITES | BLACKS;
+        // return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)));
+
         Bitboard occupancy = WHITES | BLACKS;
-        return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)));
+        if ((square_bb(sq1) | square_bb(sq2)) & occupancy) return false;
+        return true;
     }
 
     bool BitBoard::checkClearPath(Square sq1, Square sq2, Square sq3)
     {
+        // Bitboard occupancy = WHITES | BLACKS;
+        // return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)) | (occupancy & square_bb(sq3)));
+
         Bitboard occupancy = WHITES | BLACKS;
-        return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)) | (occupancy & square_bb(sq3)));
+        if ((square_bb(sq1) | square_bb(sq2) | square_bb(sq3)) & occupancy) return false;
+        return true;
     }
 
     std::optional<MoveType> BitBoard::castlingValidator(const BitMove& move)
