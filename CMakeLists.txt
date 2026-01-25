@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(test
   tests/test.cpp
+  src/init.cpp
   src/magicboard.cpp
   src/bitboard.cpp
   src/fen.cpp
