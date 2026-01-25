@@ -1,6 +1,7 @@
 #include "search.h"
 #include "time.h"
 // __builtin_popcountll();
+#include<iostream>
 
 namespace Ignis
 {
@@ -11,9 +12,8 @@ namespace Ignis
         if (moves.empty() || timeMs <= 0) return BitMove();
 
         BitMove bestMove = moves[0];
-        int32_t bestScore = -INF;
+        // int32_t bestScore = -INF;
 
-        auto start = std::chrono::steady_clock::now();
         Time timer; timer.start();
 
         for (size_t depth = 1; depth <= maxDepth; ++depth)
@@ -32,6 +32,16 @@ namespace Ignis
                 tmp.makeMoveBlind(mv, mv.type);
 
                 int32_t score = -search(tmp, depth - 1, -beta, -alpha);
+                if (depth == maxDepth) 
+                {
+                    std::cout << "DEBUG: Move " 
+                            << (char)('a' + file_of(mv.from)) << (rank_of(mv.from)+1)
+                            << "-" 
+                            << (char)('a' + file_of(mv.to)) << (rank_of(mv.to)+1)
+                            << " Score: " << score 
+                            << " (Turn: " << (board.getTurn() == WHITE ? "W" : "B") << ")"
+                            << std::endl;
+                }
 
                 if (score > localBestScore)
                 {
@@ -44,7 +54,7 @@ namespace Ignis
             }
 
             bestMove = localBestMove;
-            bestScore = localBestScore;
+            // bestScore = localBestScore;
         }
 
         TIME_UP:
@@ -60,17 +70,17 @@ namespace Ignis
         {
             if (board.isKingInCheck(board.getTurn()))
             {
-                if (board.getTurn() == mainSide) return -   (MATE_VALUE - (int32_t)depth);
-                else                             return     (MATE_VALUE - (int32_t)depth);
+                return - (MATE_VALUE - (int32_t) depth);
             }
-            else return STALEMATE_VALUE;
+            
+            return STALEMATE_VALUE;
         }
 
         if (depth == 0)
         {
             int32_t val = evulate(board);
-
-            if (board.getTurn() != mainSide) val = -val; // negamax
+            
+            if (board.getTurn() != mainSide) val = -val;
             return val;
         }
 

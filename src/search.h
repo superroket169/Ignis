@@ -3,9 +3,9 @@
 namespace Ignis
 {
     // inf ve mat farklı olmalı galiba :
-    uint32_t constexpr INF = UINT32_MAX;
-    uint32_t constexpr MATE_VALUE = UINT32_MAX;
-    uint32_t constexpr STALEMATE_VALUE = UINT32_MAX; // şimdilik mat gibi sayılsın
+    int32_t constexpr INF = 2000000000;
+    int32_t constexpr MATE_VALUE = 1000000000;
+    int32_t constexpr STALEMATE_VALUE = 0;
 
     enum RawPieceValue
     {
@@ -20,6 +20,9 @@ namespace Ignis
     {
     private:
         Color mainSide = WHITE;
+
+        // helpers
+        int popcount(Bitboard b) { return __builtin_popcountll(b); }
     public:
         Engine() = default;
 
