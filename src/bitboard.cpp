@@ -6,7 +6,7 @@
 namespace Ignis
 {
     // validators
-    std::optional<MoveType> BitBoard::pawnValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::pawnValidator(const BitMove& move) const
     {
         Bitboard toBB = square_bb(move.to);
         Direction forward   = (side == WHITE) ? NORTH : SOUTH;
@@ -53,20 +53,20 @@ namespace Ignis
         return type;
     }
 
-    std::optional<MoveType> BitBoard::knightValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::knightValidator(const BitMove& move) const
     {
         if (!(KnightAttacks[move.from] & square_bb(move.to))) return std::nullopt;
         return MoveType::NORMAL;
     }
 
-    std::optional<MoveType> BitBoard::kingValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::kingValidator(const BitMove& move) const
     {
         if (!(KingAttacks[move.from] & square_bb(move.to))) return std::nullopt;
         return MoveType::NORMAL;
     }
 
     // magic uses validators
-    std::optional<MoveType> BitBoard::bishopValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::bishopValidator(const BitMove& move) const
     {
         Bitboard occupancy = WHITES | BLACKS;
         Bitboard attacks = getBishopAttacks(move.from, occupancy);
@@ -74,7 +74,7 @@ namespace Ignis
         return MoveType::NORMAL;
     }
 
-    std::optional<MoveType> BitBoard::rookValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::rookValidator(const BitMove& move) const
     {
         Bitboard occupancy = WHITES | BLACKS;
         Bitboard attacks = getRookAttacks(move.from, occupancy);
@@ -82,7 +82,7 @@ namespace Ignis
         return MoveType::NORMAL;
     }
 
-    std::optional<MoveType> BitBoard::queenValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::queenValidator(const BitMove& move) const
     {
         Bitboard occupancy = WHITES | BLACKS;
         Bitboard attacks = getRookAttacks(move.from, occupancy) | getBishopAttacks(move.from, occupancy);
@@ -91,7 +91,7 @@ namespace Ignis
     }
 
     // önemli : şah-çekme kontrolü ve pinli taşlar eklenecek!
-    std::optional<MoveType> BitBoard::moveValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::moveValidator(const BitMove& move) const
     {
         // Friendly Fire
         Bitboard targetBit = square_bb(move.to);
@@ -118,7 +118,7 @@ namespace Ignis
         return moveType;
     }
 
-    bool BitBoard::pinnedControl(const BitMove& move, MoveType& moveType)
+    bool BitBoard::pinnedControl(const BitMove& move, MoveType& moveType) const
     {
         BitBoard tmp(*this);
         tmp.makeMoveBlind(move, moveType);
@@ -215,7 +215,7 @@ namespace Ignis
         return type;
     }
 
-    std::vector<BitMove> BitBoard::getValidMoves(Color side)
+    std::vector<BitMove> BitBoard::getValidMoves(Color side) const
     {
         std::vector<BitMove> moves; moves.reserve(40);
         Bitboard pieces = (side == WHITE) ? WHITES : BLACKS; // fixed copy error // isimlendirmeyi de yanlış yapmışım
@@ -296,7 +296,7 @@ namespace Ignis
         return moves;
     }
 
-    bool BitBoard::isSquareAttacked(Square sq, Color attacker)
+    bool BitBoard::isSquareAttacked(Square sq, Color attacker) const
     {
         Bitboard attackerPawns   = (attacker == WHITE) ? (WHITES & PAWNS)   : (BLACKS & PAWNS);
         Bitboard attackerKnights = (attacker == WHITE) ? (WHITES & KNIGHTS) : (BLACKS & KNIGHTS);
@@ -324,12 +324,12 @@ namespace Ignis
         return false;
     }
 
-    bool BitBoard::isKingInCheck()
+    bool BitBoard::isKingInCheck() const
     {
         return isKingInCheck(this->side);
     }
 
-    bool BitBoard::isKingInCheck(Color c)
+    bool BitBoard::isKingInCheck(Color c) const
     {
         Bitboard kingBit = (c == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
         if (!kingBit) return true; // salakça kontrol (:
@@ -339,7 +339,7 @@ namespace Ignis
     }
 
     // castling helperları. daha temiz bir rok olsun die
-    bool BitBoard::checkClearPath(Square sq1, Square sq2)
+    bool BitBoard::checkClearPath(Square sq1, Square sq2) const
     {
         // Bitboard occupancy = WHITES | BLACKS;
         // return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)));
@@ -349,7 +349,7 @@ namespace Ignis
         return true;
     }
 
-    bool BitBoard::checkClearPath(Square sq1, Square sq2, Square sq3)
+    bool BitBoard::checkClearPath(Square sq1, Square sq2, Square sq3) const
     {
         // Bitboard occupancy = WHITES | BLACKS;
         // return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)) | (occupancy & square_bb(sq3)));
@@ -359,7 +359,7 @@ namespace Ignis
         return true;
     }
 
-    std::optional<MoveType> BitBoard::castlingValidator(const BitMove& move)
+    std::optional<MoveType> BitBoard::castlingValidator(const BitMove& move) const
     {
         if (isKingInCheck()) return std::nullopt;
 

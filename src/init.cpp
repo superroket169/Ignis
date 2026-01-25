@@ -19,7 +19,7 @@ namespace Ignis
         return random_u64() & random_u64(); 
     }
 
-    Bitboard BitBoard::getRookAttacks(Square sq, Bitboard occupancy)
+    Bitboard BitBoard::getRookAttacks(Square sq, Bitboard occupancy) const
     {
         Bitboard mask = RookMasks[sq]; 
         occupancy &= mask;
@@ -29,7 +29,7 @@ namespace Ignis
         return RookTable[sq][index];
     }
 
-    Bitboard BitBoard::getBishopAttacks(Square sq, Bitboard occupancy)
+    Bitboard BitBoard::getBishopAttacks(Square sq, Bitboard occupancy) const
     {
         Bitboard mask = BishopMasks[sq];
         occupancy &= mask;
