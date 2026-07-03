@@ -90,6 +90,24 @@ namespace Ignis
             if (entry.flag == TT_UPPERBOUND && entry.score <= alpha) return entry.score;
         }
 
+        // null move pruning: sahta degilsek ve zugzwang riski dusukse (elimizde piyon/sah disi
+        // en az bir tas varsa) rakibe bedava bir hamle gönderip yine de beta'yi gecebiliyor
+        // muyuz diye bakariz - geciyorsak bu dal zaten cok iyi, gercek hamleleri aramaya gerek yok.
+
+        Bitboard mySide       = (board.getTurn() == WHITE) ? board.getWHITES() : board.getBLACKS();
+        Bitboard nonPawnKing  = board.getKNIGHTS() | board.getBISHOPS() | board.getROOKS() | board.getQUEENS();
+        bool hasNonPawnMaterial = (mySide & nonPawnKing) != 0;
+
+        if (depth >= 3 && !board.isKingInCheck(board.getTurn()) && hasNonPawnMaterial)
+        {
+            const size_t R = 2; // null-move indirgeme miktari
+            BitBoard nullBoard = board;
+            nullBoard.makeNullMove();
+
+            int32_t nullScore = -search(nullBoard, depth - 1 - R, -beta, -beta + 1);
+            if (nullScore >= beta) return beta;
+        }
+
         std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
             if (ttHit && a == entry.bestMove) return true;
             if (ttHit && b == entry.bestMove) return false;

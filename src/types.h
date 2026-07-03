@@ -259,6 +259,7 @@ namespace Ignis
         std::optional<MoveType>     makeMove        (BitMove& move);       // for not validated moves (could return std::nullopt) uses moveValidator
         MoveType                    makeMoveBlind   (const BitMove& move, MoveType type); // for already validated moves
         std::vector<BitMove>        getValidMoves   (Color side) const;                // returns valid moves
+        void                        makeNullMove    ();                    // hamle yapmadan sadece sirayi degistirir (null-move pruning icin)
 
         // magic number helperları
         Bitboard getRookAttacks     (Square sq, Bitboard occupancy) const;

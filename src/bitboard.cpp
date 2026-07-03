@@ -226,6 +226,12 @@ namespace Ignis
         return type;
     }
 
+    void BitBoard::makeNullMove()
+    {
+        enpassantTarget = 0;
+        passTurn();
+    }
+
     std::vector<BitMove> BitBoard::getValidMoves(Color side) const
     {
         std::vector<BitMove> moves; moves.reserve(40);
@@ -286,10 +292,8 @@ namespace Ignis
                 }
             }
 
-            // friendly fire ları çıkarma
             targets &= ~myPieces;
 
-            // buu sefer validator a sormak zorundayız // şah kontrolü için
             while(targets)
             {
                 Square to = Square(__builtin_ctzll(targets));
@@ -391,12 +395,8 @@ namespace Ignis
         return h;
     }
 
-    // castling helperları. daha temiz bir rok olsun die
     bool BitBoard::checkClearPath(Square sq1, Square sq2) const
     {
-        // Bitboard occupancy = WHITES | BLACKS;
-        // return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)));
-
         Bitboard occupancy = WHITES | BLACKS;
         if ((square_bb(sq1) | square_bb(sq2)) & occupancy) return false;
         return true;
@@ -404,9 +404,6 @@ namespace Ignis
 
     bool BitBoard::checkClearPath(Square sq1, Square sq2, Square sq3) const
     {
-        // Bitboard occupancy = WHITES | BLACKS;
-        // return !((occupancy & square_bb(sq1)) | (occupancy & square_bb(sq2)) | (occupancy & square_bb(sq3)));
-
         Bitboard occupancy = WHITES | BLACKS;
         if ((square_bb(sq1) | square_bb(sq2) | square_bb(sq3)) & occupancy) return false;
         return true;
