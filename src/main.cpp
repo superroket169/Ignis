@@ -65,8 +65,8 @@ int main()
     BitBoard board;
     Engine engine;
 
-    const size_t SEARCH_DEPTH = 7;
-    const int    TIME_BUDGET  = 3600;
+    const size_t SEARCH_DEPTH = 11;
+    const int    TIME_BUDGET  = 60000;
 
     std::cout << "Ignis - basit terminal satranc\n";
     std::cout << "Beyaz: sen (buyuk harfler) | Siyah: motor (kucuk harfler)\n";
