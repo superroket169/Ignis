@@ -1,6 +1,5 @@
 #include "search.h"
 #include "time.h"
-// __builtin_popcountll();
 #include<iostream>
 
 namespace Ignis
@@ -12,7 +11,6 @@ namespace Ignis
         if (moves.empty() || timeMs <= 0) return BitMove();
 
         BitMove bestMove = moves[0];
-        // int32_t bestScore = -INF;
 
         Time timer; timer.start();
 
@@ -25,23 +23,25 @@ namespace Ignis
 
             for (size_t i = 0; i < moves.size(); ++i)
             {
-                if (timer.elapsedTime() >= timeMs) goto TIME_UP; // goto kullanarak marjinallik
+                if (timer.elapsedTime() >= timeMs) goto TIME_UP;
 
                 BitBoard tmp = board;
                 const BitMove &mv = moves[i];
                 tmp.makeMoveBlind(mv, mv.type);
 
                 int32_t score = -search(tmp, depth - 1, -beta, -alpha);
-                if (depth == maxDepth) 
-                {
-                    std::cout << "DEBUG: Move " 
-                            << (char)('a' + file_of(mv.from)) << (rank_of(mv.from)+1)
-                            << "-" 
-                            << (char)('a' + file_of(mv.to)) << (rank_of(mv.to)+1)
-                            << " Score: " << score 
-                            << " (Turn: " << (board.getTurn() == WHITE ? "W" : "B") << ")"
-                            << std::endl;
-                }
+
+                // old debug:
+                // if (depth == maxDepth)
+                // {
+                //     std::cout << "DEBUG: Move "
+                //             << (char)('a' + file_of(mv.from)) << (rank_of(mv.from)+1)
+                //             << "-"
+                //             << (char)('a' + file_of(mv.to)) << (rank_of(mv.to)+1)
+                //             << " Score: " << score
+                //             << " (Turn: " << (board.getTurn() == WHITE ? "W" : "B") << ")"
+                //             << std::endl;
+                // }
 
                 if (score > localBestScore)
                 {
@@ -55,6 +55,12 @@ namespace Ignis
 
             bestMove = localBestMove;
             // bestScore = localBestScore;
+
+            // CLI için test
+            std::cout << "info depth " << depth << " time " << timer.elapsedTime() << "s bestmove "
+                       << (char)('a' + file_of(bestMove.from)) << (rank_of(bestMove.from) + 1)
+                       << (char)('a' + file_of(bestMove.to))   << (rank_of(bestMove.to) + 1)
+                       << " score " << localBestScore << std::endl;
         }
 
         TIME_UP:

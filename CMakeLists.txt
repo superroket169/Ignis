@@ -5,17 +5,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(test
+add_executable(ignis
   src/search.cpp
-  tests/test.cpp
+  src/main.cpp
   src/init.cpp
   src/magicboard.cpp
   src/bitboard.cpp
   src/fen.cpp
 )
 
-target_compile_options(test PRIVATE 
-    -O3 
-    -funroll-loops 
+target_compile_options(ignis PRIVATE
+    -O3
+    -funroll-loops
     -Wall
 )

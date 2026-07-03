@@ -6,17 +6,6 @@
 #include <string>
 #include <vector>
 
-/**
- * int that header, we'll define :
- * - bitBoard s
- * - color/side enums
- * - piece type enums
- * - rank/file enums
- * - square enums
- * - direction enums (for bit sliding)
- * - sorry about my inexperienceive coding style
- */
-
 namespace Ignis
 {
     using Bitboard = uint64_t;
@@ -70,7 +59,7 @@ namespace Ignis
 
     enum File : uint8_t
     {
-        FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H  = 8,
+        FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H,
         FILE_NB = 8
     };
 
@@ -173,11 +162,11 @@ namespace Ignis
         Bitboard KNIGHTS    = 0b0100001000000000000000000000000000000000000000000000000001000010;
         Bitboard BISHOPS    = 0b0010010000000000000000000000000000000000000000000000000000100100;
         Bitboard ROOKS      = 0b1000000100000000000000000000000000000000000000000000000010000001;
-        Bitboard QUEENS     = 0b0001000000000000000000000000000000000000000000000000000000001000;
-        Bitboard KINGS      = 0b0000100000000000000000000000000000000000000000000000000000010000;
+        Bitboard QUEENS     = 0b0000100000000000000000000000000000000000000000000000000000001000;
+        Bitboard KINGS      = 0b0001000000000000000000000000000000000000000000000000000000010000;
 
         Bitboard WHITES     = 0b0000000000000000000000000000000000000000000000001111111111111111;
-        Bitboard BLACKS     = 0b1111111111111100000000000000000000000000000000000000000000000000;
+        Bitboard BLACKS     = 0b1111111111111111000000000000000000000000000000000000000000000000;
 
         // piece move controlers:
         static Bitboard PawnAttacks[2][64];
@@ -206,14 +195,14 @@ namespace Ignis
         // specific values
         Bitboard enpassantTarget = 0b0000000000000000000000000000000000000000000000000000000000000000;
 
-        // Castling values
+        // Castling values (başlangıç pozisyonunda iki taraf da her iki yöne rok yapabilir)
         // white versions
-        bool whiteCastlingQS = false; // can white queen side castling
-        bool whiteCastlingKS = false; // can king side castling 
+        bool whiteCastlingQS = true; // can white queen side castling
+        bool whiteCastlingKS = true; // can king side castling
 
         // black versions
-        bool blackCastlingQS = false;
-        bool blackCastlingKS = false;
+        bool blackCastlingQS = true;
+        bool blackCastlingKS = true;
 
         // Move Side
         Color side = WHITE;

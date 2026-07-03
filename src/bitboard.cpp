@@ -147,7 +147,9 @@ namespace Ignis
         Bitboard fromBB = square_bb(move.from);
         Bitboard toBB   = square_bb(move.to);
         Bitboard moveMask = fromBB | toBB;
-        
+
+        bool movedWasPawn = (fromBB & PAWNS);
+
         if (type != MoveType::EN_PASSANT)
         {
             if (toBB & WHITES) { WHITES ^= toBB; PAWNS &= ~toBB; KNIGHTS &= ~toBB; BISHOPS &= ~toBB; ROOKS &= ~toBB; QUEENS &= ~toBB; }
@@ -164,6 +166,16 @@ namespace Ignis
         if (side == WHITE) WHITES ^= moveMask;
         else               BLACKS ^= moveMask;
 
+        // castlings
+        if (fromBB & KINGS)
+        {
+            if (side == WHITE) { whiteCastlingKS = false; whiteCastlingQS = false; }
+            else                { blackCastlingKS = false; blackCastlingQS = false; }
+        }
+        if (move.from == SQ_H1 || move.to == SQ_H1) whiteCastlingKS = false;
+        if (move.from == SQ_A1 || move.to == SQ_A1) whiteCastlingQS = false;
+        if (move.from == SQ_H8 || move.to == SQ_H8) blackCastlingKS = false;
+        if (move.from == SQ_A8 || move.to == SQ_A8) blackCastlingQS = false;
 
         if (type == MoveType::CASTLING)
         {
@@ -206,7 +218,7 @@ namespace Ignis
         }
 
         enpassantTarget = 0;
-        if ((fromBB & PAWNS) && (std::abs((int)move.to - (int)move.from) == 16))
+        if (movedWasPawn && (std::abs((int)move.to - (int)move.from) == 16))
         {
             enpassantTarget = square_bb((Square)((move.from + move.to) / 2));
         }
@@ -265,13 +277,13 @@ namespace Ignis
                 // manuel castling kontrolü ):
                 if (side == WHITE)
                 {
-                    if (whiteCastlingKS) { BitMove m(SQ_E1, SQ_G1); if(moveValidator(m)) moves.push_back(m); }
-                    if (whiteCastlingQS) { BitMove m(SQ_E1, SQ_C1); if(moveValidator(m)) moves.push_back(m); }
+                    if (whiteCastlingKS) { BitMove m(SQ_E1, SQ_G1); auto t = moveValidator(m); if(t) { m.type = t.value(); moves.push_back(m); } }
+                    if (whiteCastlingQS) { BitMove m(SQ_E1, SQ_C1); auto t = moveValidator(m); if(t) { m.type = t.value(); moves.push_back(m); } }
                 }
                 else
                 {
-                    if (blackCastlingKS) { BitMove m(SQ_E8, SQ_G8); if(moveValidator(m)) moves.push_back(m); }
-                    if (blackCastlingQS) { BitMove m(SQ_E8, SQ_C8); if(moveValidator(m)) moves.push_back(m); }
+                    if (blackCastlingKS) { BitMove m(SQ_E8, SQ_G8); auto t = moveValidator(m); if(t) { m.type = t.value(); moves.push_back(m); } }
+                    if (blackCastlingQS) { BitMove m(SQ_E8, SQ_C8); auto t = moveValidator(m); if(t) { m.type = t.value(); moves.push_back(m); } }
                 }
             }
 
@@ -283,9 +295,24 @@ namespace Ignis
             {
                 Square to = Square(__builtin_ctzll(targets));
                 BitMove m(from, to);
-                
-                if (moveValidator(m).has_value()) 
-                    moves.push_back(m);
+
+                // hamle türleri fixlendi
+                auto t = moveValidator(m);
+                if (t.has_value())
+                {
+                    if (t.value() == MoveType::PROMOTION)
+                    {
+                        moves.push_back(BitMove(from, to, MoveType::PROMOTION, PromotionPiece::Queen));
+                        moves.push_back(BitMove(from, to, MoveType::PROMOTION, PromotionPiece::Rook));
+                        moves.push_back(BitMove(from, to, MoveType::PROMOTION, PromotionPiece::Bishop));
+                        moves.push_back(BitMove(from, to, MoveType::PROMOTION, PromotionPiece::Knight));
+                    }
+                    else
+                    {
+                        m.type = t.value();
+                        moves.push_back(m);
+                    }
+                }
 
                 targets &= targets - 1;
             }
