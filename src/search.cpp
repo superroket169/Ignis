@@ -28,7 +28,10 @@ namespace Ignis
 
             for (size_t i = 0; i < moves.size(); ++i)
             {
-                if (timer.elapsedTime() >= timeMs) goto TIME_UP;
+                // timeMs adindan da anlasilacagi gibi milisaniye olmali ama elapsedTime() saniye donduruyordu,
+                // hic cevrim yapilmadan direkt karsilastiriliyordu - UCI ile gercek saatte oynarken bu motoru
+                // ya hep zaman asimina ugratir ya da hic durmadan calistirirdi. *1000 ile duzeltildi.
+                if (timer.elapsedTime() * 1000.0f >= (float)timeMs) goto TIME_UP;
 
                 BitBoard tmp = board;
                 const BitMove &mv = moves[i];
@@ -48,11 +51,15 @@ namespace Ignis
 
             bestMove = localBestMove;
 
-            // CLI için test
-            std::cout << "info depth " << depth << " time " << timer.elapsedTime() << "s bestmove "
+            // UCI'nin bekledigi standart "info" formatinda: hem CLI testinde okunakli hem de
+            // gercek bir UCI GUI/lichess-bot tarafindan ayristirilabilir.
+            std::cout << "info depth " << depth
+                       << " score cp " << localBestScore
+                       << " time " << (int)(timer.elapsedTime() * 1000.0f)
+                       << " pv "
                        << (char)('a' + file_of(bestMove.from)) << (rank_of(bestMove.from) + 1)
                        << (char)('a' + file_of(bestMove.to))   << (rank_of(bestMove.to) + 1)
-                       << " score " << localBestScore << std::endl;
+                       << std::endl;
         }
 
         TIME_UP:
@@ -202,7 +209,7 @@ namespace Ignis
 
     int32_t Engine::evulate(const BitBoard& board)
     {
-        return evuPiecesRaw(board);
+        return evuPiecesRaw(board) + evuPiecesPos(board);
     }
 
     int32_t Engine::evuPiecesRaw(const BitBoard& board)
@@ -220,6 +227,101 @@ namespace Ignis
                 - QUEEN_VALUE   * popcount(board.getQUEENS() & board.getBLACKS());
     }
 
-    // helper : 
+    // piece-square tablolari (PST)
+    namespace
+    {
+        constexpr int32_t PawnPST[64] = {
+             0,  0,  0,  0,  0,  0,  0,  0,
+             5, 10, 10,-20,-20, 10, 10,  5,
+             5, -5,-10,  0,  0,-10, -5,  5,
+             0,  0,  0, 20, 20,  0,  0,  0,
+             5,  5, 10, 25, 25, 10,  5,  5,
+            10, 10, 20, 30, 30, 20, 10, 10,
+            50, 50, 50, 50, 50, 50, 50, 50,
+             0,  0,  0,  0,  0,  0,  0,  0
+        };
+
+        constexpr int32_t KnightPST[64] = {
+            -50,-40,-30,-30,-30,-30,-40,-50,
+            -40,-20,  0,  5,  5,  0,-20,-40,
+            -30,  5, 10, 15, 15, 10,  5,-30,
+            -30,  0, 15, 20, 20, 15,  0,-30,
+            -30,  5, 15, 20, 20, 15,  5,-30,
+            -30,  0, 10, 15, 15, 10,  0,-30,
+            -40,-20,  0,  0,  0,  0,-20,-40,
+            -50,-40,-30,-30,-30,-30,-40,-50
+        };
+
+        constexpr int32_t BishopPST[64] = {
+            -20,-10,-10,-10,-10,-10,-10,-20,
+            -10,  5,  0,  0,  0,  0,  5,-10,
+            -10, 10, 10, 10, 10, 10, 10,-10,
+            -10,  0, 10, 10, 10, 10,  0,-10,
+            -10,  5,  5, 10, 10,  5,  5,-10,
+            -10,  0,  5, 10, 10,  5,  0,-10,
+            -10,  0,  0,  0,  0,  0,  0,-10,
+            -20,-10,-10,-10,-10,-10,-10,-20
+        };
+
+        constexpr int32_t RookPST[64] = {
+             0,  0,  0,  5,  5,  0,  0,  0,
+            -5,  0,  0,  0,  0,  0,  0, -5,
+            -5,  0,  0,  0,  0,  0,  0, -5,
+            -5,  0,  0,  0,  0,  0,  0, -5,
+            -5,  0,  0,  0,  0,  0,  0, -5,
+            -5,  0,  0,  0,  0,  0,  0, -5,
+             5, 10, 10, 10, 10, 10, 10,  5,
+             0,  0,  0,  0,  0,  0,  0,  0
+        };
+
+        constexpr int32_t QueenPST[64] = {
+            -20,-10,-10, -5, -5,-10,-10,-20,
+            -10,  0,  5,  0,  0,  0,  0,-10,
+            -10,  5,  5,  5,  5,  5,  0,-10,
+              0,  0,  5,  5,  5,  5,  0, -5,
+             -5,  0,  5,  5,  5,  5,  0, -5,
+            -10,  0,  5,  5,  5,  5,  0,-10,
+            -10,  0,  0,  0,  0,  0,  0,-10,
+            -20,-10,-10, -5, -5,-10,-10,-20
+        };
+
+        constexpr int32_t KingPST[64] = {
+             20, 30, 10,  0,  0, 10, 30, 20,
+             20, 20,  0,  0,  0,  0, 20, 20,
+            -10,-20,-20,-20,-20,-20,-20,-10,
+            -20,-30,-30,-40,-40,-30,-30,-20,
+            -30,-40,-40,-50,-50,-40,-40,-30,
+            -30,-40,-40,-50,-50,-40,-40,-30,
+            -30,-40,-40,-50,-50,-40,-40,-30,
+            -30,-40,-40,-50,-50,-40,-40,-30
+        };
+
+        constexpr int mirrorSq(int sq) { return sq ^ 56; }
+    }
+
+    int32_t Engine::evuPiecesPos(const BitBoard& board)
+    {
+        int32_t score = 0;
+
+        auto addPST = [&](Bitboard pieces, const int32_t* pst)
+        {
+            Bitboard white = pieces & board.getWHITES();
+            while (white) { int sq = __builtin_ctzll(white); score += pst[sq]; white &= white - 1; }
+
+            Bitboard black = pieces & board.getBLACKS();
+            while (black) { int sq = __builtin_ctzll(black); score -= pst[mirrorSq(sq)]; black &= black - 1; }
+        };
+
+        addPST(board.getPAWNS(),   PawnPST);
+        addPST(board.getKNIGHTS(), KnightPST);
+        addPST(board.getBISHOPS(), BishopPST);
+        addPST(board.getROOKS(),   RookPST);
+        addPST(board.getQUEENS(),  QueenPST);
+        addPST(board.getKINGS(),   KingPST);
+
+        return score;
+    }
+
+    // helper :
     inline int popcount(uint64_t bb) { return __builtin_popcountll(bb); }
 }
