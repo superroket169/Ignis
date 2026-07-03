@@ -1,5 +1,6 @@
 #include "types.h"
 #include "magicboard.h"
+#include "magicnumbers.h"
 #include <iostream>
 #include <cmath>
 
@@ -139,6 +140,33 @@ namespace Ignis
                 }
 
                 bool found = false;
+
+                // bilinen en iyi magic numberları ilk önce dener. altta da öyle
+                {
+                    uint64_t candidate = RookMagics[sq];
+                    std::vector<int> used(numVariations, 0);
+                    bool fail = false;
+                    for (int i = 0; i < numVariations; i++)
+                    {
+                        int magicIndex = (int)((occupancies[i] * candidate) >> magicShift);
+                        if (used[magicIndex] == 0)
+                        {
+                            used[magicIndex] = 1;
+                            RookTable[sq][magicIndex] = attacks[i];
+                        }
+                        else if (RookTable[sq][magicIndex] != attacks[i])
+                        {
+                            fail = true; break;
+                        }
+                    }
+                    if (!fail)
+                    {
+                        RookMagic[sq] = candidate;
+                        RookShift[sq] = magicShift;
+                        found = true;
+                    }
+                }
+
                 for (int k = 0; k < 100000000 && !found; k++)
                 {
                     uint64_t candidate = random_magic_candidate();
@@ -191,6 +219,32 @@ namespace Ignis
                 }
 
                 bool found = false;
+
+                {
+                    uint64_t candidate = BishopMagics[sq];
+                    std::vector<int> used(numVariations, 0);
+                    bool fail = false;
+                    for (int i = 0; i < numVariations; i++)
+                    {
+                        int magicIndex = (int)((occupancies[i] * candidate) >> magicShift);
+                        if (used[magicIndex] == 0)
+                        {
+                            used[magicIndex] = 1;
+                            BishopTable[sq][magicIndex] = attacks[i];
+                        }
+                        else if (BishopTable[sq][magicIndex] != attacks[i])
+                        {
+                            fail = true; break;
+                        }
+                    }
+                    if (!fail)
+                    {
+                        BishopMagic[sq] = candidate;
+                        BishopShift[sq] = magicShift;
+                        found = true;
+                    }
+                }
+
                 for (int k = 0; k < 100000000 && !found; k++)
                 {
                     uint64_t candidate = random_magic_candidate();
