@@ -1,4 +1,5 @@
 #include "types.h"
+#include <vector>
 
 namespace Ignis
 {
@@ -15,26 +16,39 @@ namespace Ignis
         QUEEN_VALUE =   900,
     };
 
+    enum TTFlag : uint8_t { TT_EXACT, TT_LOWERBOUND, TT_UPPERBOUND };
+
+    struct TTEntry
+    {
+        Bitboard key   = 0;
+        int32_t  score = 0;
+        int32_t  depth = -1;
+        TTFlag   flag  = TT_EXACT;
+        BitMove  bestMove;
+    };
+
+    size_t constexpr TT_SIZE = 1ull << 20;
+    Bitboard constexpr TT_MASK = TT_SIZE - 1;
+
     class Engine
     {
     private:
         Color mainSide = WHITE;
+        std::vector<TTEntry> tt;
 
         // helpers
         int popcount(Bitboard b) { return __builtin_popcountll(b); }
     public:
-        Engine() = default;
+        Engine() : tt(TT_SIZE) {}
 
-        BitMove getBestMove     (BitBoard& board, size_t maxDepth, int timeMs); // mainSide burada yenilenecek
+        BitMove getBestMove     (BitBoard& board, size_t maxDepth, int timeMs);
         int32_t search          (BitBoard& board, size_t depth, int32_t alpha, int32_t beta);
         int32_t quiescence      (BitBoard& board, int32_t alpha, int32_t beta);
 
         int32_t mvvLva          (const BitBoard& board, const BitMove& mv) const;
 
-        // evulate fonctions :
         int32_t evulate        (const BitBoard& board);
 
-        // şimdilik boş olacak evulate helperları :
         int32_t evuCentrPos    (const BitBoard& board);
         int32_t evuPiecesRaw   (const BitBoard& board);
         int32_t evuPiecesPos   (const BitBoard& board);

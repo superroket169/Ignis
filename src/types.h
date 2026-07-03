@@ -188,14 +188,18 @@ namespace Ignis
         static int RookShift[64];
         static int BishopShift[64];
 
-        // asıl final şeyleri. magicnumber!
         static std::vector<Bitboard> RookTable[64];
         static std::vector<Bitboard> BishopTable[64];
+
+        static Bitboard ZobristPiece[COLOR_NB][PIECE_TYPE_NB][64];
+        static Bitboard ZobristSide;
+        static Bitboard ZobristCastle[4];
+        static Bitboard ZobristEnPassant[8];
 
         // specific values
         Bitboard enpassantTarget = 0b0000000000000000000000000000000000000000000000000000000000000000;
 
-        // Castling values (başlangıç pozisyonunda iki taraf da her iki yöne rok yapabilir)
+        // Castling values
         // white versions
         bool whiteCastlingQS = true; // can white queen side castling
         bool whiteCastlingKS = true; // can king side castling
@@ -285,7 +289,7 @@ namespace Ignis
         std::string     getFEN(void) const;
 
         // hashing functions
-        Bitboard getHash(Bitboard k);
+        Bitboard getHash() const;
 
         // bitBoards getting :
         Bitboard getPAWNS()   const  { return PAWNS;   }

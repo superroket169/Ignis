@@ -45,7 +45,6 @@ namespace Ignis
         }
 
         if (!isValid) return std::nullopt;
-        //if ( rank_of(move.to) == RANK_1 || rank_of(move.to) == RANK_8 ) return MoveType::PROMOTION;
         
         Rank r = rank_of(move.to);
         if (r == RANK_1 || r == RANK_8) return MoveType::PROMOTION;
@@ -230,14 +229,14 @@ namespace Ignis
     std::vector<BitMove> BitBoard::getValidMoves(Color side) const
     {
         std::vector<BitMove> moves; moves.reserve(40);
-        Bitboard pieces = (side == WHITE) ? WHITES : BLACKS; // fixed copy error // isimlendirmeyi de yanlış yapmışım
-        const Bitboard myPieces = pieces; // gerçek bir şekilde friendly fire kontrolü için
+        Bitboard pieces = (side == WHITE) ? WHITES : BLACKS;
+        const Bitboard myPieces = pieces;
         
         while(pieces)
         {
             Square from = Square(__builtin_ctzll(pieces));
             Bitboard fromBB = square_bb(from);
-            Bitboard targets = 0; // en son while + pb yapacaz hepsini
+            Bitboard targets = 0;
 
             if (fromBB & PAWNS)
             {
@@ -332,18 +331,9 @@ namespace Ignis
         Bitboard attackerRookQueens   = (attacker == WHITE) ? (WHITES & (ROOKS | QUEENS)) : (BLACKS & (ROOKS | QUEENS));
         Bitboard attackerBishopQueens = (attacker == WHITE) ? (WHITES & (BISHOPS | QUEENS)) : (BLACKS & (BISHOPS | QUEENS));
 
-        // if (sq == SQ_E1 && (attackerBishopQueens & square_bb(SQ_H4)))
-        //     Bitboard bishopAttacks = getBishopAttacks(sq, WHITES | BLACKS);
-
         if (PawnAttacks[(attacker == WHITE) ? BLACK : WHITE][sq] & attackerPawns) return true;
-
-        // knight
         if (KnightAttacks[sq] & attackerKnights) return true;
-
-        // king
         if (KingAttacks[sq] & attackerKings) return true;
-
-        // rook & bishop & queen
         Bitboard occupancy = WHITES | BLACKS;
         if (getRookAttacks(sq, occupancy) & attackerRookQueens) return true;
         if (getBishopAttacks(sq, occupancy) & attackerBishopQueens) return true;
@@ -363,6 +353,42 @@ namespace Ignis
 
         Square kingSq = Square(__builtin_ctzll(kingBit));
         return isSquareAttacked(kingSq, (Color)(1 - c));
+    }
+
+    Bitboard BitBoard::getHash() const
+    {
+        Bitboard h = 0;
+
+        auto hashPieces = [&](Bitboard pieces, PieceType pt)
+        {
+            Bitboard white = pieces & WHITES;
+            while (white) { int sq = __builtin_ctzll(white); h ^= ZobristPiece[WHITE][pt][sq]; white &= white - 1; }
+
+            Bitboard black = pieces & BLACKS;
+            while (black) { int sq = __builtin_ctzll(black); h ^= ZobristPiece[BLACK][pt][sq]; black &= black - 1; }
+        };
+
+        hashPieces(PAWNS,   PAWN);
+        hashPieces(KNIGHTS, KNIGHT);
+        hashPieces(BISHOPS, BISHOP);
+        hashPieces(ROOKS,   ROOK);
+        hashPieces(QUEENS,  QUEEN);
+        hashPieces(KINGS,   KING);
+
+        if (side == BLACK) h ^= ZobristSide;
+
+        if (whiteCastlingKS) h ^= ZobristCastle[0];
+        if (whiteCastlingQS) h ^= ZobristCastle[1];
+        if (blackCastlingKS) h ^= ZobristCastle[2];
+        if (blackCastlingQS) h ^= ZobristCastle[3];
+
+        if (enpassantTarget)
+        {
+            int sq = __builtin_ctzll(enpassantTarget);
+            h ^= ZobristEnPassant[file_of((Square)sq)];
+        }
+
+        return h;
     }
 
     // castling helperları. daha temiz bir rok olsun die

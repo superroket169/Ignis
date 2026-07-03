@@ -36,18 +36,6 @@ namespace Ignis
 
                 int32_t score = -search(tmp, depth - 1, -beta, -alpha);
 
-                // old debug:
-                // if (depth == maxDepth)
-                // {
-                //     std::cout << "DEBUG: Move "
-                //             << (char)('a' + file_of(mv.from)) << (rank_of(mv.from)+1)
-                //             << "-"
-                //             << (char)('a' + file_of(mv.to)) << (rank_of(mv.to)+1)
-                //             << " Score: " << score
-                //             << " (Turn: " << (board.getTurn() == WHITE ? "W" : "B") << ")"
-                //             << std::endl;
-                // }
-
                 if (score > localBestScore)
                 {
                     localBestScore = score;
@@ -59,7 +47,6 @@ namespace Ignis
             }
 
             bestMove = localBestMove;
-            // bestScore = localBestScore;
 
             // CLI için test
             std::cout << "info depth " << depth << " time " << timer.elapsedTime() << "s bestmove "
@@ -92,11 +79,27 @@ namespace Ignis
             return quiescence(board, alpha, beta);
         }
 
+        Bitboard key = board.getHash();
+        TTEntry& entry = tt[key & TT_MASK];
+        bool ttHit = (entry.depth >= 0 && entry.key == key);
+
+        if (ttHit && (size_t)entry.depth >= depth)
+        {
+            if (entry.flag == TT_EXACT) return entry.score;
+            if (entry.flag == TT_LOWERBOUND && entry.score >= beta)  return entry.score;
+            if (entry.flag == TT_UPPERBOUND && entry.score <= alpha) return entry.score;
+        }
+
         std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
+            if (ttHit && a == entry.bestMove) return true;
+            if (ttHit && b == entry.bestMove) return false;
             return mvvLva(board, a) > mvvLva(board, b);
         });
 
+        int32_t alphaOrig = alpha;
         int32_t best = -INF;
+        BitMove bestMoveHere = moves[0];
+
         for (const auto& mv : moves)
         {
             BitBoard tmp = board;
@@ -104,11 +107,22 @@ namespace Ignis
 
             int32_t score = -search(tmp, depth - 1, -beta, -alpha); // negamax
 
-            best  = std::max(best, score);
+            if (score > best) { best = score; bestMoveHere = mv; }
             alpha = std::max(alpha, score);
 
             if (alpha >= beta) break;
         }
+
+        TTFlag flag = TT_EXACT;
+        if      (best <= alphaOrig) flag = TT_UPPERBOUND;
+        else if (best >= beta)      flag = TT_LOWERBOUND;
+
+        entry.key      = key;
+        entry.score    = best;
+        entry.depth    = (int32_t)depth;
+        entry.flag     = flag;
+        entry.bestMove = bestMoveHere;
+
         return best;
     }
 

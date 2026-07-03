@@ -53,6 +53,11 @@ namespace Ignis
     std::vector<Bitboard> BitBoard::RookTable[64];
     std::vector<Bitboard> BitBoard::BishopTable[64];
 
+    Bitboard BitBoard::ZobristPiece[COLOR_NB][PIECE_TYPE_NB][64];
+    Bitboard BitBoard::ZobristSide;
+    Bitboard BitBoard::ZobristCastle[4];
+    Bitboard BitBoard::ZobristEnPassant[8];
+
     // sorry about one big funciton
     void BitBoard::initLookups()
     {
@@ -277,6 +282,16 @@ namespace Ignis
                 if (!found) { std::cerr << "Magic Fail: Bishop " << sq << "\n"; exit(1); }
             }
         }
+
+        for (int c = 0; c < COLOR_NB; c++)
+            for (int pt = 0; pt < PIECE_TYPE_NB; pt++)
+                for (int sq = 0; sq < 64; sq++)
+                    ZobristPiece[c][pt][sq] = random_u64();
+
+        ZobristSide = random_u64();
+        for (int i = 0; i < 4; i++) ZobristCastle[i] = random_u64();
+        for (int i = 0; i < 8; i++) ZobristEnPassant[i] = random_u64();
+
         std::cerr << "Ignis: Initialization Complete." << "\n";
     }
 
