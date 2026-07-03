@@ -5,10 +5,21 @@
 
 namespace Ignis
 {
+    bool Engine::checkTime()
+    {
+        if (timeUp) return true;
+
+        nodeCount++;
+        if ((nodeCount & 2047) == 0 && timer.elapsedTime() * 1000.0f >= (float)timeBudgetMs)
+            timeUp = true;
+
+        return timeUp;
+    }
+
     BitMove Engine::getBestMove(BitBoard& board, size_t maxDepth, int timeMs)
     {
         mainSide = board.getTurn();
-        auto moves = board.getValidMoves(mainSide); 
+        auto moves = board.getValidMoves(mainSide);
         if (moves.empty() || timeMs <= 0) return BitMove();
 
         BitMove bestMove = moves[0];
@@ -17,7 +28,10 @@ namespace Ignis
             return mvvLva(board, a) > mvvLva(board, b);
         });
 
-        Time timer; timer.start();
+        timer.start();
+        timeBudgetMs = timeMs;
+        timeUp = false;
+        nodeCount = 0;
 
         for (size_t depth = 1; depth <= maxDepth; ++depth)
         {
@@ -25,19 +39,19 @@ namespace Ignis
             int32_t beta  =  INF;
             int32_t localBestScore = -INF;
             BitMove localBestMove = moves[0];
+            bool depthCompleted = true;
 
             for (size_t i = 0; i < moves.size(); ++i)
             {
-                // timeMs adindan da anlasilacagi gibi milisaniye olmali ama elapsedTime() saniye donduruyordu,
-                // hic cevrim yapilmadan direkt karsilastiriliyordu - UCI ile gercek saatte oynarken bu motoru
-                // ya hep zaman asimina ugratir ya da hic durmadan calistirirdi. *1000 ile duzeltildi.
-                if (timer.elapsedTime() * 1000.0f >= (float)timeMs) goto TIME_UP;
+                if (timer.elapsedTime() * 1000.0f >= (float)timeMs) { depthCompleted = false; break; }
 
                 BitBoard tmp = board;
                 const BitMove &mv = moves[i];
                 tmp.makeMoveBlind(mv, mv.type);
 
                 int32_t score = -search(tmp, depth - 1, -beta, -alpha);
+
+                if (timeUp) { depthCompleted = false; break; }
 
                 if (score > localBestScore)
                 {
@@ -49,10 +63,11 @@ namespace Ignis
                 if (alpha >= beta) break;
             }
 
+            if (!depthCompleted) break;
+
             bestMove = localBestMove;
 
-            // UCI'nin bekledigi standart "info" formatinda: hem CLI testinde okunakli hem de
-            // gercek bir UCI GUI/lichess-bot tarafindan ayristirilabilir.
+            // uci standart info
             std::cout << "info depth " << depth
                        << " score cp " << localBestScore
                        << " time " << (int)(timer.elapsedTime() * 1000.0f)
@@ -60,16 +75,17 @@ namespace Ignis
                        << (char)('a' + file_of(bestMove.from)) << (rank_of(bestMove.from) + 1)
                        << (char)('a' + file_of(bestMove.to))   << (rank_of(bestMove.to) + 1)
                        << std::endl;
+
+            if (timer.elapsedTime() * 1000.0f >= (float)timeMs) break;
         }
 
-        TIME_UP:
         return bestMove;
-
-        BitMove move;
     }
 
-    int32_t Engine::search (BitBoard& board, size_t depth, int32_t alpha, int32_t beta)
+    int32_t Engine::search (BitBoard& board, size_t depth, int32_t alpha, int32_t beta, bool allowNull)
     {
+        if (checkTime()) return 0;
+
         auto moves = board.getValidMoves(board.getTurn());
         if (moves.empty())
         {
@@ -97,21 +113,19 @@ namespace Ignis
             if (entry.flag == TT_UPPERBOUND && entry.score <= alpha) return entry.score;
         }
 
-        // null move pruning: sahta degilsek ve zugzwang riski dusukse (elimizde piyon/sah disi
-        // en az bir tas varsa) rakibe bedava bir hamle gönderip yine de beta'yi gecebiliyor
-        // muyuz diye bakariz - geciyorsak bu dal zaten cok iyi, gercek hamleleri aramaya gerek yok.
+        // nmp
 
         Bitboard mySide       = (board.getTurn() == WHITE) ? board.getWHITES() : board.getBLACKS();
         Bitboard nonPawnKing  = board.getKNIGHTS() | board.getBISHOPS() | board.getROOKS() | board.getQUEENS();
         bool hasNonPawnMaterial = (mySide & nonPawnKing) != 0;
 
-        if (depth >= 3 && !board.isKingInCheck(board.getTurn()) && hasNonPawnMaterial)
+        if (allowNull && depth >= 3 && !board.isKingInCheck(board.getTurn()) && hasNonPawnMaterial)
         {
             const size_t R = 2; // null-move indirgeme miktari
             BitBoard nullBoard = board;
             nullBoard.makeNullMove();
 
-            int32_t nullScore = -search(nullBoard, depth - 1 - R, -beta, -beta + 1);
+            int32_t nullScore = -search(nullBoard, depth - 1 - R, -beta, -beta + 1, false);
             if (nullScore >= beta) return beta;
         }
 
@@ -153,6 +167,8 @@ namespace Ignis
 
     int32_t Engine::quiescence(BitBoard& board, int32_t alpha, int32_t beta)
     {
+        if (checkTime()) return 0;
+
         int32_t standPat = evulate(board);
         if (board.getTurn() == BLACK) standPat = -standPat;
 

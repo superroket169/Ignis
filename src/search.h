@@ -1,4 +1,5 @@
 #include "types.h"
+#include "time.h"
 #include <vector>
 
 namespace Ignis
@@ -36,13 +37,19 @@ namespace Ignis
         Color mainSide = WHITE;
         std::vector<TTEntry> tt;
 
+        Time     timer;
+        int      timeBudgetMs = 0;
+        bool     timeUp = false;
+        uint64_t nodeCount = 0;
+        bool     checkTime();
+
         // helpers
         int popcount(Bitboard b) { return __builtin_popcountll(b); }
     public:
         Engine() : tt(TT_SIZE) {}
 
         BitMove getBestMove     (BitBoard& board, size_t maxDepth, int timeMs);
-        int32_t search          (BitBoard& board, size_t depth, int32_t alpha, int32_t beta);
+        int32_t search          (BitBoard& board, size_t depth, int32_t alpha, int32_t beta, bool allowNull = true);
         int32_t quiescence      (BitBoard& board, int32_t alpha, int32_t beta);
 
         int32_t mvvLva          (const BitBoard& board, const BitMove& mv) const;

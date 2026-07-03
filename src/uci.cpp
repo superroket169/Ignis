@@ -157,7 +157,7 @@ int main()
         }
         else if (cmd == "stop")
         {
-            
+
         }
         else if (cmd == "quit")
         {
