@@ -211,6 +211,8 @@ namespace Ignis
         Color side = WHITE;
         void passTurn() { side = side == WHITE ? BLACK : WHITE;}
 
+        std::vector<Bitboard> history;
+
     public:
         // Constructors 
         BitBoard()
@@ -245,6 +247,8 @@ namespace Ignis
             this->whiteCastlingKS = oth.whiteCastlingKS;
             this->blackCastlingQS = oth.blackCastlingQS;
             this->blackCastlingKS = oth.blackCastlingKS;
+
+            this->history = oth.history;
 
             return *this;
         }
@@ -290,6 +294,7 @@ namespace Ignis
 
         // hashing functions
         Bitboard getHash() const;
+        bool     isRepetition() const;
 
         // bitBoards getting :
         Bitboard getPAWNS()   const  { return PAWNS;   }

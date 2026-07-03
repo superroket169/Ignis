@@ -73,8 +73,21 @@ namespace Ignis
                        << " time " << (int)(timer.elapsedTime() * 1000.0f)
                        << " pv "
                        << (char)('a' + file_of(bestMove.from)) << (rank_of(bestMove.from) + 1)
-                       << (char)('a' + file_of(bestMove.to))   << (rank_of(bestMove.to) + 1)
-                       << std::endl;
+                       << (char)('a' + file_of(bestMove.to))   << (rank_of(bestMove.to) + 1);
+
+            if (bestMove.type == MoveType::PROMOTION)
+            {
+                switch (bestMove.promotion)
+                {
+                    case PromotionPiece::Queen:  std::cout << 'q'; break;
+                    case PromotionPiece::Rook:   std::cout << 'r'; break;
+                    case PromotionPiece::Bishop: std::cout << 'b'; break;
+                    case PromotionPiece::Knight: std::cout << 'n'; break;
+                    default: break;
+                }
+            }
+
+            std::cout << std::endl;
 
             if (timer.elapsedTime() * 1000.0f >= (float)timeMs) break;
         }
@@ -85,6 +98,7 @@ namespace Ignis
     int32_t Engine::search (BitBoard& board, size_t depth, int32_t alpha, int32_t beta, bool allowNull)
     {
         if (checkTime()) return 0;
+        if (board.isRepetition()) return STALEMATE_VALUE;
 
         auto moves = board.getValidMoves(board.getTurn());
         if (moves.empty())
@@ -168,6 +182,7 @@ namespace Ignis
     int32_t Engine::quiescence(BitBoard& board, int32_t alpha, int32_t beta)
     {
         if (checkTime()) return 0;
+        if (board.isRepetition()) return STALEMATE_VALUE;
 
         int32_t standPat = evulate(board);
         if (board.getTurn() == BLACK) standPat = -standPat;

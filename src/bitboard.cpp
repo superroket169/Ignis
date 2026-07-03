@@ -144,6 +144,7 @@ namespace Ignis
         Bitboard moveMask = fromBB | toBB;
 
         bool movedWasPawn = (fromBB & PAWNS);
+        bool movedWasKing = (fromBB & KINGS);
 
         if (type != MoveType::EN_PASSANT)
         {
@@ -162,7 +163,7 @@ namespace Ignis
         else               BLACKS ^= moveMask;
 
         // castlings
-        if (fromBB & KINGS)
+        if (movedWasKing)
         {
             if (side == WHITE) { whiteCastlingKS = false; whiteCastlingQS = false; }
             else                { blackCastlingKS = false; blackCastlingQS = false; }
@@ -218,7 +219,16 @@ namespace Ignis
         }
 
         passTurn();
+        history.push_back(getHash());
         return type;
+    }
+
+    bool BitBoard::isRepetition() const
+    {
+        Bitboard key = getHash();
+        int count = 0;
+        for (Bitboard h : history) if (h == key) count++;
+        return count >= 3;
     }
 
     void BitBoard::makeNullMove()
