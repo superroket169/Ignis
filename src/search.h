@@ -31,6 +31,15 @@ namespace Ignis
     size_t constexpr TT_SIZE = 1ull << 20;
     Bitboard constexpr TT_MASK = TT_SIZE - 1;
 
+    size_t  constexpr MAX_PLY     = 128;
+    int32_t constexpr HISTORY_MAX = 1000000;
+
+    struct MoveOrderKey
+    {
+        int32_t tier;
+        int32_t score;
+    };
+
     class Engine
     {
     private:
@@ -43,13 +52,23 @@ namespace Ignis
         uint64_t nodeCount = 0;
         bool     checkTime();
 
+        BitMove killerMoves[MAX_PLY][2];
+        int32_t historyTable[COLOR_NB][PIECE_TYPE_NB][64] = {};
+
+        PieceType     pieceTypeAt      (const BitBoard& board, Square sq) const;
+        MoveOrderKey  moveOrderTier    (const BitBoard& board, const BitMove& mv, size_t ply, bool ttHit, const BitMove& ttMove) const;
+        void          recordQuietCutoff(const BitBoard& board, const BitMove& mv, size_t ply, size_t depth);
+        void          resetSearchTables(); // her gercek hamlede (getBestMove basinda) killer'i temizler, history'yi yariya boler
+
+        void orderMoves(std::vector<BitMove>& moves, const BitBoard& board, size_t ply, bool ttHit, const BitMove& ttMove) const;
+
         // helpers
         int popcount(Bitboard b) { return __builtin_popcountll(b); }
     public:
         Engine() : tt(TT_SIZE) {}
 
         BitMove getBestMove     (BitBoard& board, size_t maxDepth, int timeMs);
-        int32_t search          (BitBoard& board, size_t depth, int32_t alpha, int32_t beta, bool allowNull = true);
+        int32_t search          (BitBoard& board, size_t depth, size_t ply, int32_t alpha, int32_t beta, bool allowNull = true);
         int32_t quiescence      (BitBoard& board, int32_t alpha, int32_t beta);
 
         int32_t mvvLva          (const BitBoard& board, const BitMove& mv) const;

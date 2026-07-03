@@ -19,14 +19,14 @@ namespace Ignis
     BitMove Engine::getBestMove(BitBoard& board, size_t maxDepth, int timeMs)
     {
         mainSide = board.getTurn();
+        resetSearchTables();
+
         auto moves = board.getValidMoves(mainSide);
         if (moves.empty() || timeMs <= 0) return BitMove();
 
         BitMove bestMove = moves[0];
 
-        std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
-            return mvvLva(board, a) > mvvLva(board, b);
-        });
+        orderMoves(moves, board, 0, false, BitMove());
 
         timer.start();
         timeBudgetMs = timeMs;
@@ -49,7 +49,7 @@ namespace Ignis
                 const BitMove &mv = moves[i];
                 tmp.makeMoveBlind(mv, mv.type);
 
-                int32_t score = -search(tmp, depth - 1, -beta, -alpha);
+                int32_t score = -search(tmp, depth - 1, 1, -beta, -alpha);
 
                 if (timeUp) { depthCompleted = false; break; }
 
@@ -70,6 +70,7 @@ namespace Ignis
             // uci standart info
             std::cout << "info depth " << depth
                        << " score cp " << localBestScore
+                       << " nodes " << nodeCount
                        << " time " << (int)(timer.elapsedTime() * 1000.0f)
                        << " pv "
                        << (char)('a' + file_of(bestMove.from)) << (rank_of(bestMove.from) + 1)
@@ -95,7 +96,7 @@ namespace Ignis
         return bestMove;
     }
 
-    int32_t Engine::search (BitBoard& board, size_t depth, int32_t alpha, int32_t beta, bool allowNull)
+    int32_t Engine::search (BitBoard& board, size_t depth, size_t ply, int32_t alpha, int32_t beta, bool allowNull)
     {
         if (checkTime()) return 0;
         if (board.isRepetition()) return STALEMATE_VALUE;
@@ -139,31 +140,43 @@ namespace Ignis
             BitBoard nullBoard = board;
             nullBoard.makeNullMove();
 
-            int32_t nullScore = -search(nullBoard, depth - 1 - R, -beta, -beta + 1, false);
+            int32_t nullScore = -search(nullBoard, depth - 1 - R, ply + 1, -beta, -beta + 1, false);
             if (nullScore >= beta) return beta;
         }
 
-        std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
-            if (ttHit && a == entry.bestMove) return true;
-            if (ttHit && b == entry.bestMove) return false;
-            return mvvLva(board, a) > mvvLva(board, b);
-        });
+        orderMoves(moves, board, ply, ttHit, entry.bestMove);
 
         int32_t alphaOrig = alpha;
         int32_t best = -INF;
         BitMove bestMoveHere = moves[0];
+        bool firstMove = true;
 
         for (const auto& mv : moves)
         {
             BitBoard tmp = board;
             tmp.makeMoveBlind(mv, mv.type);
 
-            int32_t score = -search(tmp, depth - 1, -beta, -alpha); // negamax
+            int32_t score;
+            if (firstMove)
+            {
+                score = -search(tmp, depth - 1, ply + 1, -beta, -alpha); // negamax, tam pencere
+                firstMove = false;
+            }
+            else
+            {
+                score = -search(tmp, depth - 1, ply + 1, -alpha - 1, -alpha);
+                if (score > alpha && score < beta)
+                    score = -search(tmp, depth - 1, ply + 1, -beta, -alpha);
+            }
 
             if (score > best) { best = score; bestMoveHere = mv; }
             alpha = std::max(alpha, score);
 
-            if (alpha >= beta) break;
+            if (alpha >= beta)
+            {
+                recordQuietCutoff(board, mv, ply, depth);
+                break;
+            }
         }
 
         TTFlag flag = TT_EXACT;
@@ -238,6 +251,84 @@ namespace Ignis
         return 100000 + victimValue * 100 - attackerValue;
     }
 
+    PieceType Engine::pieceTypeAt(const BitBoard& board, Square sq) const
+    {
+        Bitboard sqBB = square_bb(sq);
+        if (sqBB & board.getPAWNS())   return PAWN;
+        if (sqBB & board.getKNIGHTS()) return KNIGHT;
+        if (sqBB & board.getBISHOPS()) return BISHOP;
+        if (sqBB & board.getROOKS())   return ROOK;
+        if (sqBB & board.getQUEENS())  return QUEEN;
+        if (sqBB & board.getKINGS())   return KING;
+        return NO_PIECE_TYPE;
+    }
+
+    MoveOrderKey Engine::moveOrderTier(const BitBoard& board, const BitMove& mv, size_t ply, bool ttHit, const BitMove& ttMove) const
+    {
+        if (ttHit && mv == ttMove) return { 4, 0 };
+
+        int32_t mvv = mvvLva(board, mv);
+        if (mvv > 0) return { 3, mvv };
+
+        if (ply < MAX_PLY)
+        {
+            if (mv == killerMoves[ply][0]) return { 2, 1 };
+            if (mv == killerMoves[ply][1]) return { 2, 0 };
+        }
+
+        if (mv.type == MoveType::PROMOTION) return { 2, 0 };
+
+        PieceType pt = pieceTypeAt(board, mv.from);
+        return { 1, historyTable[board.getTurn()][pt][mv.to] };
+    }
+
+    void Engine::recordQuietCutoff(const BitBoard& board, const BitMove& mv, size_t ply, size_t depth)
+    {
+        if (mvvLva(board, mv) > 0) return;        // capture ise killer/history'e katma
+        if (mv.type == MoveType::PROMOTION) return;
+
+        if (ply < MAX_PLY && !(mv == killerMoves[ply][0]))
+        {
+            killerMoves[ply][1] = killerMoves[ply][0];
+            killerMoves[ply][0] = mv;
+        }
+
+        PieceType pt = pieceTypeAt(board, mv.from);
+        int32_t& h = historyTable[board.getTurn()][pt][mv.to];
+        h += (int32_t)(depth * depth);
+        if (h > HISTORY_MAX) h = HISTORY_MAX;
+    }
+
+    void Engine::orderMoves(std::vector<BitMove>& moves, const BitBoard& board, size_t ply, bool ttHit, const BitMove& ttMove) const
+    {
+        std::vector<std::pair<MoveOrderKey, BitMove>> keyed;
+        keyed.reserve(moves.size());
+
+        for (const auto& mv : moves)
+            keyed.emplace_back(moveOrderTier(board, mv, ply, ttHit, ttMove), mv);
+
+        std::sort(keyed.begin(), keyed.end(), [](const auto& a, const auto& b) {
+            if (a.first.tier != b.first.tier) return a.first.tier > b.first.tier;
+            return a.first.score > b.first.score;
+        });
+
+        for (size_t i = 0; i < moves.size(); ++i) moves[i] = keyed[i].second;
+    }
+
+    void Engine::resetSearchTables()
+    {
+        for (size_t p = 0; p < MAX_PLY; ++p)
+        {
+            killerMoves[p][0] = BitMove();
+            killerMoves[p][1] = BitMove();
+        }
+
+        for (int c = 0; c < COLOR_NB; ++c)
+            for (int pt = 0; pt < PIECE_TYPE_NB; ++pt)
+                for (int sq = 0; sq < 64; ++sq)
+                    historyTable[c][pt][sq] /= 2;
+    }
+
     int32_t Engine::evulate(const BitBoard& board)
     {
         return evuPiecesRaw(board) + evuPiecesPos(board);
@@ -261,7 +352,7 @@ namespace Ignis
     // piece-square tablolari (PST)
     namespace
     {
-        constexpr int32_t PawnPST[64] = {
+        constexpr int32_t PawnMidPST[64] = {
              0,  0,  0,  0,  0,  0,  0,  0,
              5, 10, 10,-20,-20, 10, 10,  5,
              5, -5,-10,  0,  0,-10, -5,  5,
@@ -270,6 +361,17 @@ namespace Ignis
             10, 10, 20, 30, 30, 20, 10, 10,
             50, 50, 50, 50, 50, 50, 50, 50,
              0,  0,  0,  0,  0,  0,  0,  0
+        };
+
+        constexpr int32_t PawnEndPST[64] = {
+              0,   0,   0,   0,   0,   0,   0,   0,
+             10,  10,  10,  10,  10,  10,  10,  10,
+             20,  20,  20,  20,  20,  20,  20,  20,
+             30,  30,  30,  30,  30,  30,  30,  30,
+             50,  50,  50,  50,  50,  50,  50,  50,
+             80,  80,  80,  80,  80,  80,  80,  80,
+            120, 120, 120, 120, 120, 120, 120, 120,
+              0,   0,   0,   0,   0,   0,   0,   0
         };
 
         constexpr int32_t KnightPST[64] = {
@@ -316,7 +418,7 @@ namespace Ignis
             -20,-10,-10, -5, -5,-10,-10,-20
         };
 
-        constexpr int32_t KingPST[64] = {
+        constexpr int32_t KingMidPST[64] = {
              20, 30, 10,  0,  0, 10, 30, 20,
              20, 20,  0,  0,  0,  0, 20, 20,
             -10,-20,-20,-20,-20,-20,-20,-10,
@@ -327,11 +429,30 @@ namespace Ignis
             -30,-40,-40,-50,-50,-40,-40,-30
         };
 
+        constexpr int32_t KingEndPST[64] = {
+            -50,-30,-30,-30,-30,-30,-30,-50,
+            -30,-30,  0,  0,  0,  0,-30,-30,
+            -30,-10, 20, 30, 30, 20,-10,-30,
+            -30,-10, 30, 40, 40, 30,-10,-30,
+            -30,-10, 30, 40, 40, 30,-10,-30,
+            -30,-10, 20, 30, 30, 20,-10,-30,
+            -30,-20,-10,  0,  0,-10,-20,-30,
+            -50,-40,-30,-20,-20,-30,-40,-50
+        };
+
         constexpr int mirrorSq(int sq) { return sq ^ 56; }
+
+        constexpr int32_t PHASE_MAX = 24;
     }
 
     int32_t Engine::evuPiecesPos(const BitBoard& board)
     {
+        int32_t phase = popcount(board.getKNIGHTS()) * 1
+                      + popcount(board.getBISHOPS()) * 1
+                      + popcount(board.getROOKS())   * 2
+                      + popcount(board.getQUEENS())  * 4;
+        if (phase > PHASE_MAX) phase = PHASE_MAX;
+
         int32_t score = 0;
 
         auto addPST = [&](Bitboard pieces, const int32_t* pst)
@@ -343,12 +464,23 @@ namespace Ignis
             while (black) { int sq = __builtin_ctzll(black); score -= pst[mirrorSq(sq)]; black &= black - 1; }
         };
 
-        addPST(board.getPAWNS(),   PawnPST);
+        auto addTaperedPST = [&](Bitboard pieces, const int32_t* mgPst, const int32_t* egPst)
+        {
+            auto blended = [&](int sq) { return (mgPst[sq] * phase + egPst[sq] * (PHASE_MAX - phase)) / PHASE_MAX; };
+
+            Bitboard white = pieces & board.getWHITES();
+            while (white) { int sq = __builtin_ctzll(white); score += blended(sq); white &= white - 1; }
+
+            Bitboard black = pieces & board.getBLACKS();
+            while (black) { int sq = __builtin_ctzll(black); score -= blended(mirrorSq(sq)); black &= black - 1; }
+        };
+
+        addTaperedPST(board.getPAWNS(), PawnMidPST, PawnEndPST);
         addPST(board.getKNIGHTS(), KnightPST);
         addPST(board.getBISHOPS(), BishopPST);
         addPST(board.getROOKS(),   RookPST);
         addPST(board.getQUEENS(),  QueenPST);
-        addPST(board.getKINGS(),   KingPST);
+        addTaperedPST(board.getKINGS(), KingMidPST, KingEndPST);
 
         return score;
     }
