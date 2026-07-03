@@ -1,6 +1,7 @@
 #include "search.h"
 #include "time.h"
 #include<iostream>
+#include<algorithm>
 
 namespace Ignis
 {
@@ -11,6 +12,10 @@ namespace Ignis
         if (moves.empty() || timeMs <= 0) return BitMove();
 
         BitMove bestMove = moves[0];
+
+        std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
+            return mvvLva(board, a) > mvvLva(board, b);
+        });
 
         Time timer; timer.start();
 
@@ -78,17 +83,18 @@ namespace Ignis
             {
                 return - (MATE_VALUE - (int32_t) depth);
             }
-            
+
             return STALEMATE_VALUE;
         }
 
         if (depth == 0)
         {
-            int32_t val = evulate(board);
-            
-            if (board.getTurn() != mainSide) val = -val;
-            return val;
+            return quiescence(board, alpha, beta);
         }
+
+        std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
+            return mvvLva(board, a) > mvvLva(board, b);
+        });
 
         int32_t best = -INF;
         for (const auto& mv : moves)
@@ -104,6 +110,62 @@ namespace Ignis
             if (alpha >= beta) break;
         }
         return best;
+    }
+
+    int32_t Engine::quiescence(BitBoard& board, int32_t alpha, int32_t beta)
+    {
+        int32_t standPat = evulate(board);
+        if (board.getTurn() == BLACK) standPat = -standPat;
+
+        if (standPat >= beta) return beta;
+        if (standPat > alpha) alpha = standPat;
+
+        auto moves = board.getValidMoves(board.getTurn());
+        std::sort(moves.begin(), moves.end(), [&](const BitMove& a, const BitMove& b) {
+            return mvvLva(board, a) > mvvLva(board, b);
+        });
+
+        for (const auto& mv : moves)
+        {
+            if (mvvLva(board, mv) == 0) continue;
+
+            BitBoard tmp = board;
+            tmp.makeMoveBlind(mv, mv.type);
+
+            int32_t score = -quiescence(tmp, -beta, -alpha);
+
+            if (score >= beta) return beta;
+            if (score > alpha) alpha = score;
+        }
+
+        return alpha;
+    }
+
+    int32_t Engine::mvvLva(const BitBoard& board, const BitMove& mv) const
+    {
+        Bitboard toBB  = square_bb(mv.to);
+        Bitboard enemy = (board.getTurn() == WHITE) ? board.getBLACKS() : board.getWHITES();
+
+        bool isCapture = (toBB & enemy) || mv.type == MoveType::EN_PASSANT;
+        if (!isCapture) return 0;
+
+        int32_t victimValue = PAWN_VALUE;
+        if      (mv.type == MoveType::EN_PASSANT)  victimValue = PAWN_VALUE;
+        else if (toBB & board.getKNIGHTS())         victimValue = KNIGHT_VALUE;
+        else if (toBB & board.getBISHOPS())         victimValue = BISHOP_VALUE;
+        else if (toBB & board.getROOKS())           victimValue = ROOK_VALUE;
+        else if (toBB & board.getQUEENS())          victimValue = QUEEN_VALUE;
+
+        Bitboard fromBB = square_bb(mv.from);
+        int32_t attackerValue;
+        if      (fromBB & board.getPAWNS())   attackerValue = PAWN_VALUE;
+        else if (fromBB & board.getKNIGHTS()) attackerValue = KNIGHT_VALUE;
+        else if (fromBB & board.getBISHOPS()) attackerValue = BISHOP_VALUE;
+        else if (fromBB & board.getROOKS())   attackerValue = ROOK_VALUE;
+        else if (fromBB & board.getQUEENS())  attackerValue = QUEEN_VALUE;
+        else                                    attackerValue = QUEEN_VALUE + PAWN_VALUE;
+
+        return 100000 + victimValue * 100 - attackerValue;
     }
 
     int32_t Engine::evulate(const BitBoard& board)

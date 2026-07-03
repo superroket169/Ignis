@@ -2,7 +2,6 @@
 
 namespace Ignis
 {
-    // inf ve mat farklı olmalı galiba :
     int32_t constexpr INF = 2000000000;
     int32_t constexpr MATE_VALUE = 1000000000;
     int32_t constexpr STALEMATE_VALUE = 0;
@@ -28,6 +27,9 @@ namespace Ignis
 
         BitMove getBestMove     (BitBoard& board, size_t maxDepth, int timeMs); // mainSide burada yenilenecek
         int32_t search          (BitBoard& board, size_t depth, int32_t alpha, int32_t beta);
+        int32_t quiescence      (BitBoard& board, int32_t alpha, int32_t beta);
+
+        int32_t mvvLva          (const BitBoard& board, const BitMove& mv) const;
 
         // evulate fonctions :
         int32_t evulate        (const BitBoard& board);
