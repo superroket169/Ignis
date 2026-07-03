@@ -58,10 +58,8 @@ namespace Ignis
     Bitboard BitBoard::ZobristCastle[4];
     Bitboard BitBoard::ZobristEnPassant[8];
 
-    // sorry about one big funciton
     void BitBoard::initLookups()
     {
-        // debug controlü
         static bool isInitialized = false;
         if (isInitialized) return;
         isInitialized = true;

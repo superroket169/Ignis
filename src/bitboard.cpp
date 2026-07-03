@@ -23,7 +23,6 @@ namespace Ignis
             if (!(toBB & occupancy)) isValid = true;
         }
         
-        // double push        
         else if (move.to == move.from + forward + forward)
         {
             Square pathSquare = move.from + forward;
@@ -33,7 +32,6 @@ namespace Ignis
             }
         }
 
-        // çapraz şeyler
         else if (PawnAttacks[side][move.from] & toBB)
         {
             if (toBB & enemy) isValid = true;
@@ -89,10 +87,8 @@ namespace Ignis
         return MoveType::NORMAL;
     }
 
-    // önemli : şah-çekme kontrolü ve pinli taşlar eklenecek!
     std::optional<MoveType> BitBoard::moveValidator(const BitMove& move) const
     {
-        // Friendly Fire
         Bitboard targetBit = square_bb(move.to);
         Bitboard myPieces = (side == WHITE) ? WHITES : BLACKS;
         if (myPieces & targetBit) return std::nullopt;
@@ -201,7 +197,6 @@ namespace Ignis
             else               WHITES &= ~captureBB;
         }
 
-        // promotipn
         else if (type == MoveType::PROMOTION)
         {
             PAWNS &= ~toBB;
@@ -248,7 +243,6 @@ namespace Ignis
             {
                 Direction dir = (side == WHITE) ? NORTH : SOUTH;
 
-                // tekli ileri
                 BitMove pushMove(from, (Square)(from + dir));
                 if (moveValidator(pushMove).has_value())
                 {
@@ -262,7 +256,6 @@ namespace Ignis
                     else moves.push_back(pushMove);
                 }
 
-                // ikili ileri
                 BitMove doubleMove(from, (Square)(from + dir + dir));
                 if (moveValidator(doubleMove).has_value())
                 {
@@ -279,7 +272,6 @@ namespace Ignis
             {
                 targets = KingAttacks[from];
                 
-                // manuel castling kontrolü ):
                 if (side == WHITE)
                 {
                     if (whiteCastlingKS) { BitMove m(SQ_E1, SQ_G1); auto t = moveValidator(m); if(t) { m.type = t.value(); moves.push_back(m); } }
@@ -299,7 +291,6 @@ namespace Ignis
                 Square to = Square(__builtin_ctzll(targets));
                 BitMove m(from, to);
 
-                // hamle türleri fixlendi
                 auto t = moveValidator(m);
                 if (t.has_value())
                 {
@@ -353,7 +344,7 @@ namespace Ignis
     bool BitBoard::isKingInCheck(Color c) const
     {
         Bitboard kingBit = (c == WHITE) ? (WHITES & KINGS) : (BLACKS & KINGS);
-        if (!kingBit) return true; // salakça kontrol (:
+        if (!kingBit) return true;
 
         Square kingSq = Square(__builtin_ctzll(kingBit));
         return isSquareAttacked(kingSq, (Color)(1 - c));
@@ -415,10 +406,8 @@ namespace Ignis
 
         Color enemy = (side == WHITE) ? BLACK : WHITE;
 
-        // white
         if (side == WHITE)
         {
-            // king side castling
             if (move.from == SQ_E1 && move.to == SQ_G1)
             {
                 if (!whiteCastlingKS)                       return std::nullopt;
@@ -427,7 +416,6 @@ namespace Ignis
 
                 return MoveType::CASTLING;
             }
-            // queenside castling
             else if (move.from == SQ_E1 && move.to == SQ_C1)
             {
                 if (!whiteCastlingQS)                       return std::nullopt;
@@ -437,10 +425,8 @@ namespace Ignis
                 return MoveType::CASTLING;
             }
         }
-        // black
         else
         {
-            // kingside castling
             if (move.from == SQ_E8 && move.to == SQ_G8)
             {
                 if (!blackCastlingKS)                       return std::nullopt;
@@ -449,7 +435,6 @@ namespace Ignis
 
                 return MoveType::CASTLING;
             }
-            // queenside castling
             else if (move.from == SQ_E8 && move.to == SQ_C8)
             {
                 if (!blackCastlingQS)                       return std::nullopt;

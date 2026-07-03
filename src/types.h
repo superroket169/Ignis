@@ -122,7 +122,6 @@ namespace Ignis
         CASTLING
     };
     
-    // bunu neden enum class yaptım hiçbir fikrim yok / çakışma olmasın diye
     enum class PromotionPiece
     {
         None,
@@ -138,7 +137,7 @@ namespace Ignis
         Square from;
         Square to;
         MoveType type;
-        PromotionPiece promotion = PromotionPiece::None; // Varsayılan: Yok
+        PromotionPiece promotion = PromotionPiece::None;
 
         // default constructor
         BitMove() : from(SQ_NONE), to(SQ_NONE), type(NORMAL), promotion(PromotionPiece::None) {}

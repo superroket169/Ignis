@@ -45,11 +45,9 @@ namespace Ignis
                 Square sq   = (Square)(rank * 8 + file);
                 Bitboard bb = (1ULL << sq);
 
-                // rengi ekleme
                 if(isupper(c)) WHITES |= bb;
                 else           BLACKS |= bb;
 
-                // asıl piece i ekleme
                 char lowerC = tolower(c);
                 switch(lowerC)
                 {
@@ -99,19 +97,17 @@ namespace Ignis
         }
     }
 
-    // fen e dönüştürür
     std::string BitBoard::getFEN() const
     {
         std::string fen = "";
 
-        // 1. pieces
         for(int rank = 7; rank >= 0; --rank)
         {
             int emptyCount = 0;
             for(int file = 0; file < 8; ++file)
             {
-                Square sq = (Square)(rank * 8 + file); // buna da helper yazalım böyle çarpa işlemi falan ayıp oluyor, << ımız var
-                Bitboard bb = square_bb(sq); // helper ımız var bizim!
+                Square sq = (Square)(rank * 8 + file);
+                Bitboard bb = square_bb(sq);
 
                 char pieceChar = 0;
 
@@ -149,10 +145,8 @@ namespace Ignis
             if(rank > 0) fen += "/";
         }
 
-        // 2. Side
         fen += (side == WHITE) ? " w " : " b ";
 
-        // 3. Castlings
         std::string castling = "";
         if(whiteCastlingKS) castling += "K";
         if(whiteCastlingQS) castling += "Q";
@@ -162,11 +156,10 @@ namespace Ignis
         fen += (castling.empty() ? "-" : castling);
         fen += " ";
 
-        // 4. Enpassant
         if (enpassantTarget != 0)
         {
             int epSquare = -1;
-            for(int i=0; i<64; ++i) // enpassant bitişini brut_f bulur
+            for(int i=0; i<64; ++i)
                 if(enpassantTarget & (1ULL << i)) { epSquare = i; break; }
 
             if(epSquare != -1)
@@ -178,7 +171,6 @@ namespace Ignis
         }
         else fen += "-";
 
-        // 5. Halfmove & Fullmove // şimdilik boş değerker
         fen += " 0 1";
 
         return fen;
