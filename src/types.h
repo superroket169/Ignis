@@ -153,6 +153,22 @@ namespace Ignis
         bool operator==(const BitMove& other) const { return from == other.from && to == other.to && promotion == other.promotion; }
     };
 
+    struct Undo
+    {
+        PieceType capturedType  = NO_PIECE_TYPE;
+        Color     movedSide     = WHITE;
+        Bitboard  prevEnpassant = 0;
+        bool      prevWhiteKS = true, prevWhiteQS = true, prevBlackKS = true, prevBlackQS = true;
+        Bitboard  prevHash = 0;
+        MoveType  type = NORMAL;
+    };
+
+    struct NullUndo
+    {
+        Bitboard prevEnpassant = 0;
+        Bitboard prevHash      = 0;
+    };
+
     class BitBoard
     {
     private:
@@ -212,12 +228,16 @@ namespace Ignis
         void passTurn() { side = side == WHITE ? BLACK : WHITE;}
 
         std::vector<Bitboard> history;
+        Bitboard hash = 0;
+
+        Bitboard computeHashFromScratch() const;
 
     public:
         // Constructors 
         BitBoard()
         {
             initLookups();
+            hash = computeHashFromScratch();
         }
         BitBoard(const BitBoard& oth)
         {
@@ -249,6 +269,7 @@ namespace Ignis
             this->blackCastlingKS = oth.blackCastlingKS;
 
             this->history = oth.history;
+            this->hash    = oth.hash;
 
             return *this;
         }
@@ -260,9 +281,11 @@ namespace Ignis
         // Move Functions
         std::optional<MoveType>     moveValidator   (const BitMove& move) const; // validates move
         std::optional<MoveType>     makeMove        (BitMove& move);       // for not validated moves (could return std::nullopt) uses moveValidator
-        MoveType                    makeMoveBlind   (const BitMove& move, MoveType type); // for already validated moves
+        Undo                        makeMoveBlind   (const BitMove& move, MoveType type); // for already validated moves, undo bilgisini dondurur
+        void                        unmakeMove      (const BitMove& move, const Undo& undo);
         std::vector<BitMove>        getValidMoves   (Color side) const;                // returns valid moves
-        void                        makeNullMove    ();                    // hamle yapmadan sadece sirayi degistirir (null-move pruning icin)
+        NullUndo                    makeNullMove    ();
+        void                        unmakeNullMove  (const NullUndo& undo);
 
         // magic number helperları
         Bitboard getRookAttacks     (Square sq, Bitboard occupancy) const;

@@ -95,6 +95,9 @@ namespace Ignis
                 enpassantTarget = (1ULL << sq);
             }
         }
+
+        history.clear();
+        hash = computeHashFromScratch();
     }
 
     std::string BitBoard::getFEN() const

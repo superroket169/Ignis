@@ -115,10 +115,14 @@ namespace Ignis
 
     bool BitBoard::pinnedControl(const BitMove& move, MoveType& moveType) const
     {
-        BitBoard tmp(*this);
-        tmp.makeMoveBlind(move, moveType);
+        Color movingSide = side;
+        BitBoard* self = const_cast<BitBoard*>(this);
 
-        return !tmp.isKingInCheck(this->side);
+        Undo u = self->makeMoveBlind(move, moveType);
+        bool inCheck = self->isKingInCheck(movingSide);
+        self->unmakeMove(move, u);
+
+        return !inCheck;
     }
 
     std::optional<MoveType> BitBoard::makeMove(BitMove& move)
@@ -137,8 +141,18 @@ namespace Ignis
         return type;
     }
     
-    MoveType BitBoard::makeMoveBlind(const BitMove& move, MoveType type)
+    Undo BitBoard::makeMoveBlind(const BitMove& move, MoveType type)
     {
+        Undo u;
+        u.type          = type;
+        u.movedSide     = side;
+        u.prevEnpassant = enpassantTarget;
+        u.prevWhiteKS   = whiteCastlingKS;
+        u.prevWhiteQS   = whiteCastlingQS;
+        u.prevBlackKS   = blackCastlingKS;
+        u.prevBlackQS   = blackCastlingQS;
+        u.prevHash      = hash;
+
         Bitboard fromBB = square_bb(move.from);
         Bitboard toBB   = square_bb(move.to);
         Bitboard moveMask = fromBB | toBB;
@@ -148,8 +162,22 @@ namespace Ignis
 
         if (type != MoveType::EN_PASSANT)
         {
-            if (toBB & WHITES) { WHITES ^= toBB; PAWNS &= ~toBB; KNIGHTS &= ~toBB; BISHOPS &= ~toBB; ROOKS &= ~toBB; QUEENS &= ~toBB; }
-            if (toBB & BLACKS) { BLACKS ^= toBB; PAWNS &= ~toBB; KNIGHTS &= ~toBB; BISHOPS &= ~toBB; ROOKS &= ~toBB; QUEENS &= ~toBB; }
+            auto capturedTypeAt = [&](Bitboard bb) -> PieceType
+            {
+                if (bb & PAWNS)   return PAWN;
+                if (bb & KNIGHTS) return KNIGHT;
+                if (bb & BISHOPS) return BISHOP;
+                if (bb & ROOKS)   return ROOK;
+                if (bb & QUEENS)  return QUEEN;
+                return NO_PIECE_TYPE;
+            };
+
+            if (toBB & WHITES) { u.capturedType = capturedTypeAt(toBB); WHITES ^= toBB; PAWNS &= ~toBB; KNIGHTS &= ~toBB; BISHOPS &= ~toBB; ROOKS &= ~toBB; QUEENS &= ~toBB; }
+            if (toBB & BLACKS) { u.capturedType = capturedTypeAt(toBB); BLACKS ^= toBB; PAWNS &= ~toBB; KNIGHTS &= ~toBB; BISHOPS &= ~toBB; ROOKS &= ~toBB; QUEENS &= ~toBB; }
+        }
+        else
+        {
+            u.capturedType = PAWN;
         }
 
         if      (fromBB & PAWNS)   PAWNS   ^= moveMask;
@@ -219,8 +247,86 @@ namespace Ignis
         }
 
         passTurn();
-        history.push_back(getHash());
-        return type;
+        hash = computeHashFromScratch();
+        history.push_back(hash);
+        return u;
+    }
+
+    void BitBoard::unmakeMove(const BitMove& move, const Undo& u)
+    {
+        side            = u.movedSide;
+        enpassantTarget = u.prevEnpassant;
+        whiteCastlingKS = u.prevWhiteKS;
+        whiteCastlingQS = u.prevWhiteQS;
+        blackCastlingKS = u.prevBlackKS;
+        blackCastlingQS = u.prevBlackQS;
+        hash            = u.prevHash;
+        history.pop_back();
+
+        Bitboard fromBB   = square_bb(move.from);
+        Bitboard toBB     = square_bb(move.to);
+        Bitboard moveMask = fromBB | toBB;
+
+        if (u.type == MoveType::PROMOTION)
+        {
+            QUEENS  &= ~toBB;
+            ROOKS   &= ~toBB;
+            BISHOPS &= ~toBB;
+            KNIGHTS &= ~toBB;
+            PAWNS   |= fromBB;
+        }
+        else
+        {
+            if      (toBB & PAWNS)   PAWNS   ^= moveMask;
+            else if (toBB & KNIGHTS) KNIGHTS ^= moveMask;
+            else if (toBB & BISHOPS) BISHOPS ^= moveMask;
+            else if (toBB & ROOKS)   ROOKS   ^= moveMask;
+            else if (toBB & QUEENS)  QUEENS  ^= moveMask;
+            else if (toBB & KINGS)   KINGS   ^= moveMask;
+        }
+
+        if (u.movedSide == WHITE) WHITES ^= moveMask;
+        else                      BLACKS ^= moveMask;
+
+        if (u.type == MoveType::EN_PASSANT)
+        {
+            Square captureSq = (u.movedSide == WHITE) ? (move.to + SOUTH) : (move.to + NORTH);
+            Bitboard captureBB = square_bb(captureSq);
+
+            PAWNS |= captureBB;
+            if (u.movedSide == WHITE) BLACKS |= captureBB;
+            else                      WHITES |= captureBB;
+        }
+        else if (u.capturedType != NO_PIECE_TYPE)
+        {
+            switch (u.capturedType)
+            {
+                case PAWN:   PAWNS   |= toBB; break;
+                case KNIGHT: KNIGHTS |= toBB; break;
+                case BISHOP: BISHOPS |= toBB; break;
+                case ROOK:   ROOKS   |= toBB; break;
+                case QUEEN:  QUEENS  |= toBB; break;
+                default: break;
+            }
+
+            if (u.movedSide == WHITE) BLACKS |= toBB;
+            else                      WHITES |= toBB;
+        }
+
+        if (u.type == MoveType::CASTLING)
+        {
+            Square rookFrom = SQ_A1, rookTo = SQ_A1;
+            if (move.to == SQ_G1)      { rookFrom = SQ_H1; rookTo = SQ_F1; }
+            else if (move.to == SQ_C1) { rookFrom = SQ_A1; rookTo = SQ_D1; }
+            else if (move.to == SQ_G8) { rookFrom = SQ_H8; rookTo = SQ_F8; }
+            else if (move.to == SQ_C8) { rookFrom = SQ_A8; rookTo = SQ_D8; }
+
+            Bitboard rookMask = square_bb(rookFrom) | square_bb(rookTo);
+
+            ROOKS ^= rookMask;
+            if (u.movedSide == WHITE) WHITES ^= rookMask;
+            else                      BLACKS ^= rookMask;
+        }
     }
 
     bool BitBoard::isRepetition() const
@@ -231,10 +337,24 @@ namespace Ignis
         return count >= 3;
     }
 
-    void BitBoard::makeNullMove()
+    NullUndo BitBoard::makeNullMove()
     {
+        NullUndo u;
+        u.prevEnpassant = enpassantTarget;
+        u.prevHash      = hash;
+
         enpassantTarget = 0;
         passTurn();
+        hash = computeHashFromScratch();
+
+        return u;
+    }
+
+    void BitBoard::unmakeNullMove(const NullUndo& u)
+    {
+        passTurn();
+        enpassantTarget = u.prevEnpassant;
+        hash            = u.prevHash;
     }
 
     std::vector<BitMove> BitBoard::getValidMoves(Color side) const
@@ -361,6 +481,11 @@ namespace Ignis
     }
 
     Bitboard BitBoard::getHash() const
+    {
+        return hash;
+    }
+
+    Bitboard BitBoard::computeHashFromScratch() const
     {
         Bitboard h = 0;
 

@@ -45,11 +45,12 @@ namespace Ignis
             {
                 if (timer.elapsedTime() * 1000.0f >= (float)timeMs) { depthCompleted = false; break; }
 
-                BitBoard tmp = board;
                 const BitMove &mv = moves[i];
-                tmp.makeMoveBlind(mv, mv.type);
+                Undo u = board.makeMoveBlind(mv, mv.type);
 
-                int32_t score = -search(tmp, depth - 1, 1, -beta, -alpha);
+                int32_t score = -search(board, depth - 1, 1, -beta, -alpha);
+
+                board.unmakeMove(mv, u);
 
                 if (timeUp) { depthCompleted = false; break; }
 
@@ -137,10 +138,12 @@ namespace Ignis
         if (allowNull && depth >= 3 && !board.isKingInCheck(board.getTurn()) && hasNonPawnMaterial)
         {
             const size_t R = 2; // null-move indirgeme miktari
-            BitBoard nullBoard = board;
-            nullBoard.makeNullMove();
+            NullUndo nu = board.makeNullMove();
 
-            int32_t nullScore = -search(nullBoard, depth - 1 - R, ply + 1, -beta, -beta + 1, false);
+            int32_t nullScore = -search(board, depth - 1 - R, ply + 1, -beta, -beta + 1, false);
+
+            board.unmakeNullMove(nu);
+
             if (nullScore >= beta) return beta;
         }
 
@@ -153,21 +156,22 @@ namespace Ignis
 
         for (const auto& mv : moves)
         {
-            BitBoard tmp = board;
-            tmp.makeMoveBlind(mv, mv.type);
+            Undo u = board.makeMoveBlind(mv, mv.type);
 
             int32_t score;
             if (firstMove)
             {
-                score = -search(tmp, depth - 1, ply + 1, -beta, -alpha); // negamax, tam pencere
+                score = -search(board, depth - 1, ply + 1, -beta, -alpha); // negamax, tam pencere
                 firstMove = false;
             }
             else
             {
-                score = -search(tmp, depth - 1, ply + 1, -alpha - 1, -alpha);
+                score = -search(board, depth - 1, ply + 1, -alpha - 1, -alpha);
                 if (score > alpha && score < beta)
-                    score = -search(tmp, depth - 1, ply + 1, -beta, -alpha);
+                    score = -search(board, depth - 1, ply + 1, -beta, -alpha);
             }
+
+            board.unmakeMove(mv, u);
 
             if (score > best) { best = score; bestMoveHere = mv; }
             alpha = std::max(alpha, score);
@@ -212,10 +216,9 @@ namespace Ignis
         {
             if (mvvLva(board, mv) == 0) continue;
 
-            BitBoard tmp = board;
-            tmp.makeMoveBlind(mv, mv.type);
-
-            int32_t score = -quiescence(tmp, -beta, -alpha);
+            Undo u = board.makeMoveBlind(mv, mv.type);
+            int32_t score = -quiescence(board, -beta, -alpha);
+            board.unmakeMove(mv, u);
 
             if (score >= beta) return beta;
             if (score > alpha) alpha = score;

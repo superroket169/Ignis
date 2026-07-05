@@ -133,7 +133,7 @@ int main()
             int timeBudgetMs;
             if (movetime > 0)
             {
-                timeBudgetMs = movetime;
+                timeBudgetMs = movetime - 50;
             }
             else
             {
@@ -146,8 +146,8 @@ int main()
                     timeBudgetMs = 3000;
             }
 
-            if (timeBudgetMs < 50)   timeBudgetMs = 50;
-            if (timeBudgetMs > 3000) timeBudgetMs = 3000;
+            if (timeBudgetMs < 50)    timeBudgetMs = 50;
+            if (timeBudgetMs > 60000) timeBudgetMs = 60000;
 
             size_t depth = (depthLimit > 0) ? (size_t)depthLimit : 64;
 
