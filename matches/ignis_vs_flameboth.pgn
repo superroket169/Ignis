@@ -1,0 +1,2039 @@
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "1"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:57.650 +03"]
+[GameStartTime "2026-07-04T21:54:55.764 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "1"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "1"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:56.892 +03"]
+[GameStartTime "2026-07-04T21:54:55.597 +03"]
+[PlyCount "0"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+{White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "2"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "B00"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:54:57.196 +03"]
+[GameStartTime "2026-07-04T21:54:55.170 +03"]
+[Opening "King's pawn Opening"]
+[PlyCount "1"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. e4 {0.00/6 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "2"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:56.974 +03"]
+[GameStartTime "2026-07-04T21:54:55.701 +03"]
+[PlyCount "0"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+{White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "3"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:58.780 +03"]
+[GameStartTime "2026-07-04T21:54:56.893 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "1"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "3"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:58.381 +03"]
+[GameStartTime "2026-07-04T21:54:56.974 +03"]
+[Opening "Reti Opening"]
+[PlyCount "2"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "4"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:59.042 +03"]
+[GameStartTime "2026-07-04T21:54:57.196 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "1"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "4"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:54:58.865 +03"]
+[GameStartTime "2026-07-04T21:54:57.651 +03"]
+[PlyCount "0"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+{White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "5"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:00.204 +03"]
+[GameStartTime "2026-07-04T21:54:58.382 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "1"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "5"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:00.183 +03"]
+[GameStartTime "2026-07-04T21:54:58.781 +03"]
+[Opening "Reti Opening"]
+[PlyCount "2"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "6"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:01.158 +03"]
+[GameStartTime "2026-07-04T21:54:58.867 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "3"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "6"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:00.222 +03"]
+[GameStartTime "2026-07-04T21:54:59.045 +03"]
+[PlyCount "0"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+{White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "7"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:02.538 +03"]
+[GameStartTime "2026-07-04T21:55:00.183 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "3"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "7"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:02.179 +03"]
+[GameStartTime "2026-07-04T21:55:00.204 +03"]
+[Opening "Reti Opening"]
+[PlyCount "4"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "8"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:02.488 +03"]
+[GameStartTime "2026-07-04T21:55:00.223 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "3"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "8"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:02.712 +03"]
+[GameStartTime "2026-07-04T21:55:01.159 +03"]
+[Opening "Queen's pawn game"]
+[PlyCount "2"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "9"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:04.492 +03"]
+[GameStartTime "2026-07-04T21:55:02.180 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "3"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "9"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "B00"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:04.242 +03"]
+[GameStartTime "2026-07-04T21:55:02.488 +03"]
+[Opening "King's pawn"]
+[PlyCount "2"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+[Variation "Nimzowitsch defense"]
+
+1. e4 Nc6 {0.00/5 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "10"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:05.481 +03"]
+[GameStartTime "2026-07-04T21:55:02.539 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "5"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5
+3. Nc3 {+0.69/5 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "10"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:04.926 +03"]
+[GameStartTime "2026-07-04T21:55:02.713 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "4"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s} 2. Bg5 Nc6 {+0.24/5 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "11"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:07.291 +03"]
+[GameStartTime "2026-07-04T21:55:04.242 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "5"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5
+3. Nc3 {+0.69/5 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "11"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:07.149 +03"]
+[GameStartTime "2026-07-04T21:55:04.493 +03"]
+[Opening "Reti Opening"]
+[PlyCount "6"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1
+e5 {+0.27/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "12"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:07.870 +03"]
+[GameStartTime "2026-07-04T21:55:04.927 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "5"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5
+3. Nc3 {+0.69/5 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "12"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:07.493 +03"]
+[GameStartTime "2026-07-04T21:55:05.482 +03"]
+[Opening "Reti Opening"]
+[PlyCount "4"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "13"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:10.213 +03"]
+[GameStartTime "2026-07-04T21:55:07.149 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "5"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5
+3. Nc3 {+0.69/5 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "13"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "B00"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:09.158 +03"]
+[GameStartTime "2026-07-04T21:55:07.292 +03"]
+[Opening "King's pawn"]
+[PlyCount "4"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+[Variation "Nimzowitsch defense"]
+
+1. e4 Nc6 {0.00/5 0.30s} 2. Bb5 Nf6 {+0.33/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "14"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:09.180 +03"]
+[GameStartTime "2026-07-04T21:55:07.494 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "5"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5
+3. Nc3 {+0.69/5 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "14"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:10.413 +03"]
+[GameStartTime "2026-07-04T21:55:07.871 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "6"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5
+Ne4 {+0.05/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "15"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:12.964 +03"]
+[GameStartTime "2026-07-04T21:55:09.159 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "7"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.32s}
+Qd6 {0.53s} 4. e4 {+1.05/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "15"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:11.820 +03"]
+[GameStartTime "2026-07-04T21:55:09.180 +03"]
+[Opening "Reti Opening"]
+[PlyCount "6"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1
+e5 {+0.27/5 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "16"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:14.041 +03"]
+[GameStartTime "2026-07-04T21:55:10.214 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "7"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s}
+Qd6 {0.54s} 4. e4 {+1.05/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "16"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:12.287 +03"]
+[GameStartTime "2026-07-04T21:55:10.415 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "8"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.30s} 3. d5 Ne4 {+0.05/4 0.30s}
+4. dxc6 Nxg5 {-1.00/6 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "17"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:15.102 +03"]
+[GameStartTime "2026-07-04T21:55:11.820 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "7"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "17"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:15.003 +03"]
+[GameStartTime "2026-07-04T21:55:12.287 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "10"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5 Ne4 {+0.05/4 0.30s}
+4. dxc6 Nxg5 {-1.00/6 0.31s} 5. Qd5 dxc6 {-1.15/5 0.31s, White loses on time}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "18"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:16.225 +03"]
+[GameStartTime "2026-07-04T21:55:12.965 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "7"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "18"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:16.495 +03"]
+[GameStartTime "2026-07-04T21:55:14.042 +03"]
+[Opening "Reti Opening"]
+[PlyCount "8"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "19"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:55:16.714 +03"]
+[GameStartTime "2026-07-04T21:55:15.003 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "5"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5
+3. Nc3 {+0.69/5 0.32s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "19"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:17.529 +03"]
+[GameStartTime "2026-07-04T21:55:15.103 +03"]
+[Opening "Reti Opening"]
+[PlyCount "8"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "20"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:20.202 +03"]
+[GameStartTime "2026-07-04T21:55:16.226 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.32s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "20"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:20.144 +03"]
+[GameStartTime "2026-07-04T21:55:16.496 +03"]
+[Opening "Reti Opening"]
+[PlyCount "10"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "21"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:19.999 +03"]
+[GameStartTime "2026-07-04T21:55:16.715 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "7"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.32s} a6
+4. e4 {+1.05/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "21"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:21.139 +03"]
+[GameStartTime "2026-07-04T21:55:17.530 +03"]
+[Opening "Reti Opening"]
+[PlyCount "10"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "22"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:23.941 +03"]
+[GameStartTime "2026-07-04T21:55:20.000 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "22"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:23.276 +03"]
+[GameStartTime "2026-07-04T21:55:20.144 +03"]
+[Opening "Reti Opening"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Nb5
+a6 {+1.75/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "23"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:23.323 +03"]
+[GameStartTime "2026-07-04T21:55:20.202 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "23"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:24.294 +03"]
+[GameStartTime "2026-07-04T21:55:21.140 +03"]
+[Opening "Reti Opening"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Nb5
+a6 {+1.75/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "24"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:26.528 +03"]
+[GameStartTime "2026-07-04T21:55:23.277 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "7"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "24"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "B00"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:25.825 +03"]
+[GameStartTime "2026-07-04T21:55:23.324 +03"]
+[Opening "King's pawn"]
+[PlyCount "6"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+[Variation "Nimzowitsch defense"]
+
+1. e4 Nc6 {0.00/5 0.31s} 2. Bb5 Nf6 {+0.33/5 0.30s} 3. Bxc6
+dxc6 {+0.30/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "25"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:27.032 +03"]
+[GameStartTime "2026-07-04T21:55:23.942 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "25"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:27.487 +03"]
+[GameStartTime "2026-07-04T21:55:24.294 +03"]
+[Opening "Reti Opening"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1
+d4 {+1.80/4 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "26"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:29.677 +03"]
+[GameStartTime "2026-07-04T21:55:25.826 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5
+6. Nc3 {+1.20/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "26"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:29.754 +03"]
+[GameStartTime "2026-07-04T21:55:26.529 +03"]
+[Opening "Reti Opening"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1
+d4 {+1.80/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "27"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:30.888 +03"]
+[GameStartTime "2026-07-04T21:55:27.033 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5
+6. Nc3 {+1.20/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "27"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:31.371 +03"]
+[GameStartTime "2026-07-04T21:55:27.487 +03"]
+[Opening "Reti Opening"]
+[PlyCount "14"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.31s}
+7. Nb5 Be6 {+2.00/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "28"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:32.490 +03"]
+[GameStartTime "2026-07-04T21:55:29.678 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s} f5
+6. Nc3 {+1.20/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "28"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:33.642 +03"]
+[GameStartTime "2026-07-04T21:55:29.754 +03"]
+[Opening "Reti Opening"]
+[PlyCount "14"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.31s}
+7. Nb5 Be6 {+2.00/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "29"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:33.944 +03"]
+[GameStartTime "2026-07-04T21:55:30.888 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s} f5
+6. Nc3 {+1.20/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "29"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:34.042 +03"]
+[GameStartTime "2026-07-04T21:55:31.372 +03"]
+[Opening "Reti Opening"]
+[PlyCount "4"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 d5 {-0.20/6 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "30"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:36.759 +03"]
+[GameStartTime "2026-07-04T21:55:32.491 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "13"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "30"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:37.645 +03"]
+[GameStartTime "2026-07-04T21:55:33.643 +03"]
+[Opening "Reti Opening"]
+[PlyCount "16"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.31s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "31"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:38.201 +03"]
+[GameStartTime "2026-07-04T21:55:33.945 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "13"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "31"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:38.088 +03"]
+[GameStartTime "2026-07-04T21:55:34.043 +03"]
+[Opening "Reti Opening"]
+[PlyCount "16"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.31s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "32"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:40.621 +03"]
+[GameStartTime "2026-07-04T21:55:36.760 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "13"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "32"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:42.461 +03"]
+[GameStartTime "2026-07-04T21:55:37.645 +03"]
+[Opening "Reti Opening"]
+[PlyCount "18"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.31s} 5. Ng1 d5 {+0.95/4 0.31s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1
+Bc4 {+2.51/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "33"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:42.094 +03"]
+[GameStartTime "2026-07-04T21:55:38.088 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "33"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:41.055 +03"]
+[GameStartTime "2026-07-04T21:55:38.203 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "10"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5 Ne4 {+0.05/4 0.30s}
+4. dxc6 Nxg5 {-1.00/6 0.30s} 5. Qd5 bxc6 {0.00/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "34"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:45.109 +03"]
+[GameStartTime "2026-07-04T21:55:40.622 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "15"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s} a4 8. Bf4 {+1.80/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "34"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:43.965 +03"]
+[GameStartTime "2026-07-04T21:55:41.056 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.30s} 3. d5 Ne4 {+0.05/4 0.30s}
+4. dxc6 Nxg5 {-1.00/6 0.31s} 5. Qd5 bxc6 {0.00/5 0.31s} 6. Qxg5
+e6 {-1.38/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "35"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:45.225 +03"]
+[GameStartTime "2026-07-04T21:55:42.095 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "35"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:05"]
+[GameEndTime "2026-07-04T21:55:47.622 +03"]
+[GameStartTime "2026-07-04T21:55:42.475 +03"]
+[Opening "Reti Opening"]
+[PlyCount "20"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.31s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1 Bc4 {+2.51/4 0.30s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "36"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:48.110 +03"]
+[GameStartTime "2026-07-04T21:55:43.965 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "13"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "36"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "B00"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:47.977 +03"]
+[GameStartTime "2026-07-04T21:55:45.109 +03"]
+[Opening "King's pawn"]
+[PlyCount "8"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+[Variation "Nimzowitsch defense"]
+
+1. e4 Nc6 {0.00/5 0.30s} 2. Bb5 Nf6 {+0.33/5 0.31s} 3. Bxc6 dxc6 {+0.30/5 0.30s}
+4. e5 Ng4 {+0.03/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "37"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:49.102 +03"]
+[GameStartTime "2026-07-04T21:55:45.226 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5
+6. Nc3 {+1.20/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "37"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:05"]
+[GameEndTime "2026-07-04T21:55:53.285 +03"]
+[GameStartTime "2026-07-04T21:55:47.623 +03"]
+[Opening "Reti Opening"]
+[PlyCount "22"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.31s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.31s}
+7. Nb5 Be6 {+2.00/4 0.31s} 8. c3 Bxa2 {+2.51/4 0.31s} 9. Ra1 Bc4 {+2.51/4 0.30s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s} 11. cxd4 Qxd4 {+1.88/4 0.30s, White loses on time}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "38"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:52.451 +03"]
+[GameStartTime "2026-07-04T21:55:47.978 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "15"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s} a4 8. Bf4 {+1.80/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "38"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:51.597 +03"]
+[GameStartTime "2026-07-04T21:55:48.111 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5 Ne4 {+0.05/4 0.31s}
+4. dxc6 Nxg5 {-1.00/6 0.31s} 5. Qd5 dxc6 {-1.15/5 0.31s} 6. Qxg5
+h6 {-1.51/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "39"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:55:51.933 +03"]
+[GameStartTime "2026-07-04T21:55:49.103 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5
+6. Nc3 {+1.20/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "39"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:54.832 +03"]
+[GameStartTime "2026-07-04T21:55:51.598 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "14"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5 Ne4 {+0.05/4 0.30s}
+4. dxc6 Nxg5 {-1.00/6 0.30s} 5. Qd5 bxc6 {0.00/5 0.30s} 6. Qxg5
+e6 {-1.38/5 0.31s} 7. Qxd8+ Kxd8 {-1.84/6 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "40"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:55:56.094 +03"]
+[GameStartTime "2026-07-04T21:55:51.933 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "13"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "40"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "B00"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:55.936 +03"]
+[GameStartTime "2026-07-04T21:55:52.452 +03"]
+[Opening "King's pawn"]
+[PlyCount "10"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+[Variation "Nimzowitsch defense"]
+
+1. e4 Nc6 {0.00/5 0.30s} 2. Bb5 Nf6 {+0.33/5 0.31s} 3. Bxc6 dxc6 {+0.30/5 0.30s}
+4. e5 Ng4 {+0.03/4 0.30s} 5. Qe2 f6 {+0.25/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "41"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:57.186 +03"]
+[GameStartTime "2026-07-04T21:55:53.286 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.15/5 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "41"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:58.217 +03"]
+[GameStartTime "2026-07-04T21:55:54.834 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "14"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5 Ne4 {+0.05/4 0.31s}
+4. dxc6 Nxg5 {-1.00/6 0.31s} 5. Qd5 dxc6 {-1.15/5 0.31s} 6. Qxg5
+h6 {-1.51/4 0.31s} 7. Qd2 e5 {-1.35/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "42"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:55:59.386 +03"]
+[GameStartTime "2026-07-04T21:55:55.936 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "15"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.31s} a4 8. Bf4 {+1.80/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "42"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:00.831 +03"]
+[GameStartTime "2026-07-04T21:55:56.095 +03"]
+[Opening "Reti Opening"]
+[PlyCount "18"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1
+Bc4 {+2.51/4 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "43"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:00.356 +03"]
+[GameStartTime "2026-07-04T21:55:57.187 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "9"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "43"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:01.730 +03"]
+[GameStartTime "2026-07-04T21:55:58.218 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "16"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.30s} 3. d5 Ne4 {+0.05/4 0.31s}
+4. dxc6 Nxg5 {-1.00/6 0.31s} 5. Qd5 bxc6 {0.00/5 0.31s} 6. Qxg5
+e6 {-1.38/5 0.30s} 7. Qxd8+ Kxd8 {-1.84/6 0.31s} 8. Nf3
+Rb8 {-1.82/6 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "44"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:04.160 +03"]
+[GameStartTime "2026-07-04T21:55:59.387 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "17"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.31s} a5
+7. Bd3 {+1.55/4 0.30s} a4 8. Bf4 {+1.80/4 0.31s} b5
+9. O-O {+2.05/3 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "44"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:04.970 +03"]
+[GameStartTime "2026-07-04T21:56:00.357 +03"]
+[Opening "Reti Opening"]
+[PlyCount "22"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.31s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1 Bc4 {+2.51/4 0.31s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s} 11. cxd4 Qxd4 {+1.88/4 0.30s, White loses on time}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "45"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:04.886 +03"]
+[GameStartTime "2026-07-04T21:56:00.833 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "13"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "45"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:05.020 +03"]
+[GameStartTime "2026-07-04T21:56:01.730 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s} 2. Bg5 Nc6 {+0.24/5 0.31s} 3. d5 Ne4 {+0.05/4 0.31s}
+4. dxc6 Nxg5 {-1.00/6 0.31s} 5. Qd5 dxc6 {-1.15/5 0.31s} 6. Qxg5
+e6 {-1.32/5 0.31s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "46"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:09.081 +03"]
+[GameStartTime "2026-07-04T21:56:04.161 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "17"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s} a4 8. Bf4 {+1.80/4 0.31s} b5
+9. O-O {+2.05/3 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "46"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:05"]
+[GameEndTime "2026-07-04T21:56:09.989 +03"]
+[GameStartTime "2026-07-04T21:56:04.886 +03"]
+[Opening "Reti Opening"]
+[PlyCount "20"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.31s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1 Bc4 {+2.51/4 0.31s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "47"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:08.875 +03"]
+[GameStartTime "2026-07-04T21:56:04.973 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5
+6. Nc3 {+1.20/4 0.31s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "47"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A45"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:08.261 +03"]
+[GameStartTime "2026-07-04T21:56:05.022 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "14"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.31s} 2. Bg5 Nc6 {+0.24/5 0.30s} 3. d5 Ne4 {+0.05/4 0.30s}
+4. dxc6 Nxg5 {-1.00/6 0.30s} 5. Qd5 dxc6 {-1.15/5 0.30s} 6. Qxg5
+e6 {-1.32/5 0.30s} 7. Qxd8+ Kxd8 {-1.77/7 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "48"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:12.763 +03"]
+[GameStartTime "2026-07-04T21:56:08.263 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "15"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s} a4 8. Bf4 {+1.80/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "48"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:05"]
+[GameEndTime "2026-07-04T21:56:14.567 +03"]
+[GameStartTime "2026-07-04T21:56:08.877 +03"]
+[Opening "Reti Opening"]
+[PlyCount "24"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.30s} 2. Nc3 Nc6 {0.00/5 0.31s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1 Bc4 {+2.51/4 0.31s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s} 11. cxd4 Qxd4 {+1.88/4 0.30s} 12. e3
+Qd5 {+1.71/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "49"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:13.983 +03"]
+[GameStartTime "2026-07-04T21:56:09.084 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "17"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.30s} a6
+4. e4 {+1.15/5 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s} a4 8. Bf4 {+1.80/4 0.30s} b5
+9. Qe2 {+1.95/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "49"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "A05"]
+[GameDuration "00:00:05"]
+[GameEndTime "2026-07-04T21:56:15.584 +03"]
+[GameStartTime "2026-07-04T21:56:09.989 +03"]
+[Opening "Reti Opening"]
+[PlyCount "22"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.31s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.31s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1 Bc4 {+2.51/4 0.31s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s} 11. cxd4 Qxd4 {+1.88/4 0.31s, White loses on time}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "50"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:04"]
+[GameEndTime "2026-07-04T21:56:17.415 +03"]
+[GameStartTime "2026-07-04T21:56:12.764 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "15"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.30s} c6 2. Nf3 {+0.90/5 0.31s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.31s} a4 8. Bf4 {+1.80/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "50"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "0-1"]
+[ECO "B00"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:17.234 +03"]
+[GameStartTime "2026-07-04T21:56:13.984 +03"]
+[Opening "King's pawn"]
+[PlyCount "12"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+[Variation "Nimzowitsch defense"]
+
+1. e4 Nc6 {0.00/5 0.30s} 2. Bb5 Nf6 {+0.33/5 0.30s} 3. Bxc6 dxc6 {+0.30/5 0.30s}
+4. e5 Ng4 {+0.03/4 0.31s} 5. Qe2 f6 {+0.25/4 0.31s} 6. e6
+Ne5 {+0.22/4 0.30s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "51"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "1-0"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:56:17.437 +03"]
+[GameStartTime "2026-07-04T21:56:14.568 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "11"]
+[Termination "time forfeit"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5
+6. Nc3 {+1.20/4 0.30s, Black loses on time} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "51"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "*"]
+[ECO "A05"]
+[GameDuration "00:00:03"]
+[GameEndTime "2026-07-04T21:56:19.418 +03"]
+[GameStartTime "2026-07-04T21:56:15.585 +03"]
+[Opening "Reti Opening"]
+[PlyCount "22"]
+[Termination "unterminated"]
+[TimeControl "0.3/move"]
+
+1. Nf3 Nf6 {0.00/5 0.31s} 2. Nc3 Nc6 {0.00/5 0.30s} 3. Rb1 e5 {+0.27/5 0.30s}
+4. Ra1 e4 {+0.50/4 0.30s} 5. Ng1 d5 {+0.95/4 0.30s} 6. Rb1 d4 {+1.80/4 0.30s}
+7. Nb5 Be6 {+2.00/4 0.30s} 8. c3 Bxa2 {+2.51/4 0.30s} 9. Ra1 Bc4 {+2.51/4 0.31s}
+10. Nxd4 Nxd4 {+2.33/4 0.30s} 11. cxd4 Qxd4 {+1.88/4 0.30s, No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "52"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "*"]
+[ECO "A40"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:56:19.417 +03"]
+[GameStartTime "2026-07-04T21:56:17.235 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "14"]
+[Termination "unterminated"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.30s} f5 6. Nc3 {+1.20/4 0.30s} a5
+7. Bd3 {+1.55/4 0.30s} a4 {No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "52"]
+[White "FlameBoth"]
+[Black "Ignis"]
+[Result "*"]
+[ECO "A45"]
+[GameDuration "00:00:02"]
+[GameEndTime "2026-07-04T21:56:19.419 +03"]
+[GameStartTime "2026-07-04T21:56:17.416 +03"]
+[Opening "Trompowsky attack (Ruth, Opovcensky Opening)"]
+[PlyCount "13"]
+[Termination "unterminated"]
+[TimeControl "0.3/move"]
+
+1. d4 Nf6 {0.00/5 0.30s} 2. Bg5 Nc6 {+0.24/5 0.30s} 3. d5 Ne4 {+0.05/4 0.31s}
+4. dxc6 Nxg5 {-1.00/6 0.30s} 5. Qd5 bxc6 {0.00/5 0.30s} 6. Qxg5
+e6 {-1.38/5 0.31s} 7. Qxd8+ {No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.04"]
+[Round "53"]
+[White "Ignis"]
+[Black "FlameBoth"]
+[Result "*"]
+[ECO "A40"]
+[GameDuration "00:00:01"]
+[GameEndTime "2026-07-04T21:56:19.417 +03"]
+[GameStartTime "2026-07-04T21:56:17.438 +03"]
+[Opening "Queen's pawn"]
+[PlyCount "12"]
+[Termination "unterminated"]
+[TimeControl "0.3/move"]
+
+1. d4 {+0.40/5 0.31s} c6 2. Nf3 {+0.90/5 0.30s} d5 3. Nc3 {+0.69/5 0.31s} a6
+4. e4 {+1.05/4 0.30s} dxe4 5. Nxe4 {+0.95/4 0.31s} f5 6. Nc3 {+1.20/4 0.30s}
+a5 {No result} *
+
